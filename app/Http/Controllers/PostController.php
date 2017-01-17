@@ -6,11 +6,12 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-use App\Post;
+use App\Patient;
 use App\Vaccine;
 use App\Immunization;
 use Session;
 use PDF;
+use Validator;
 
 
 class PostController extends Controller
@@ -30,9 +31,9 @@ class PostController extends Controller
 
     public function index()
     {
-        $post = Post::orderBy('id', 'desc')->paginate(10);
+        $patient = Patient::orderBy('PatientID', 'desc')->paginate(10);
         $vaccine = Vaccine::all();
-        return view('posts.index')->withPosts($post)->withVaccines($vaccine);
+        return view('patients.index')->withPatients($patient)->withVaccines($vaccine);
 
     }
 
@@ -43,48 +44,59 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        return view('patients.create');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created resource in storpatient_age.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-                'pat_fname' => 'required|max:255',
-                'pat_lname' => 'required|max:255',
-                'pat_bdate' => 'required|max:255',
-                'weight' => 'required|max:255',
-                'height' => 'required|max:255',
-                'age' => 'required|max:255',
-                'sex' => 'required|min:1',
-                'mother_name' => 'required|max:255',
-                'address' => 'required|max:255',
-                'pat_uname' => 'required|max:255',
-                'pat_pass' => 'required|max:255'
+        $validator = Validator::make($request->all(), [
+                'patient_fname' => 'required|max:255',
+                'patient_lname' => 'required|max:255',
+                'patient_bdate' => 'required|max:255',
+                'patient_weight' => 'required|max:255',
+                'patient_height' => 'required|max:255',
+                'patient_age' => 'required|max:255',
+                'patient_sex' => 'required|min:1',
+                'patient_mother_name' => 'required|max:255',
+                'patient_address' => 'required|max:255',
+                'patient_uname' => 'required|max:255|Alpha_num',
+                'patient_pass' => 'required|max:255|Alpha_num'
         ]);
         
-        $post = new Post;
-        $post->pat_fname = $request->pat_fname;
-        $post->pat_lname = $request->pat_lname;
-        $post->pat_bdate = $request->pat_bdate;
-        $post->weight = $request->weight;
-        $post->height = $request->height;
-        $post->age = $request->age;
-        $post->sex = $request->sex;
-        $post->mother_name = $request->mother_name;
-        $post->address = $request->address;
-        $post->pat_uname = $request->pat_uname;
-        $post->pat_pass = $request->pat_pass;
-        $post->registration_date = $request->registration_date;
+     
 
-        $post->save();
+        // if ($validator->fails()) {
 
-        echo $post->id;
+        //   return response()->json(['input' => $validator->errors()->keys()]);
+
+        // }else{
+        //     echo 'success';
+        // }
+       
+      
+        $patient = new Patient;
+        $patient->patient_fname = $request->patient_fname;
+        $patient->patient_lname = $request->patient_lname;
+        $patient->patient_bdate = $request->patient_bdate;
+        $patient->patient_weight = $request->patient_weight;
+        $patient->patient_height = $request->patient_height;
+        $patient->patient_age = $request->patient_age;
+        $patient->patient_sex = $request->patient_sex;
+        $patient->patient_mother_name = $request->patient_mother_name;
+        $patient->patient_address = $request->patient_address;
+        $patient->patient_uname = $request->patient_uname;
+        $patient->patient_pass = $request->patient_pass;
+        $patient->patient_registration_date = $request->patient_registration_date;
+
+        $patient->save();
+
+        echo $patient->PatientID;
     }
 
     /**
@@ -96,7 +108,7 @@ class PostController extends Controller
     public function show($id)
     {
 
-        $post = Post::find($id);
+        $patient = Patient::find($id);
         $immunizationstatus = Immunization::where('p_id', '=' , $id)->orderBy('id','desc')->get();
 
         $vaccination_date = [];
@@ -127,7 +139,7 @@ class PostController extends Controller
          
 
 
-        return view('posts.show')->withPosts($post)->withVaccinationdates($vaccination_date)->withImmunizationstatuses($immunizationstatus);
+        return view('patients.show')->withPatients($patient)->withVaccinationdates($vaccination_date)->withImmunizationstatuses($immunizationstatus);
     }
 
     /**
@@ -138,12 +150,12 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        $post = Post::find($id);
-        return view('posts.edit')->withPost($post);
+        $patient = Patient::find($id);
+        return view('patients.edit')->withPatient($patient);
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified resource in storpatient_age.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -151,8 +163,8 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $post = Post::find($id);
-        // if ($request->slug == $post->slug) {
+        // $patient = Patient::find($id);
+        // if ($request->slug == $patient->slug) {
         //     $this->validate($request, array(
         //         'title' => 'required|max:255',
         //         'body' => 'required'
@@ -164,11 +176,11 @@ class PostController extends Controller
         //         'body' => 'required'
         //     ));
         // }
-        $post = Post::find($request->id);
+        $patient = Patient::find($request->id);
 
-        $post->$request['col'] = $request->value;
+        $patient->$request['col'] = $request->value;
 
-        $post->save();
+        $patient->save();
 
         
         echo $request->value;
@@ -176,50 +188,50 @@ class PostController extends Controller
 
         // Session::flash('success' , 'Successfully saved.');
 
-        // return redirect()->route('posts.index');
+        // return redirect()->route('patients.index');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified resource from storpatient_age.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $post = Post::find($id);
-        $post->delete();       
+        $patient = Patient::find($id);
+        $patient->delete();       
         Session::flash('Success', 'Record Successfully Deleted');
-        return redirect()->route('posts.index');
+        return redirect()->route('patients.index');
     }
 
     public function search(Request $request){
         if ($request->ajax()) {
             $output = "";
             if (empty($request->sort)) {
-                $sort = 'id';
+                $sort = 'PatientId';
             }else{
                 $sort = $request->sort;
             }
 
-            $posts = Post::orderBy($sort, 'asc')->where('pat_fname','like', $request->search.'%')->orWhere('pat_lname','like', $request->search.'%')->orWhere('address','like', $request->search.'%')->get();
+            $patients = Patient::orderBy($sort, 'asc')->where('patient_fname','like', $request->search.'%')->orWhere('patient_lname','like', $request->search.'%')->orWhere('patient_address','like', $request->search.'%')->get();
             
-            if ($posts) {
-                foreach ($posts as  $post) {
-                    $output .= "<tr><td class='date registration_date' id='".$post->id."'>".$post->registration_date."</td>".
-                               "<td class='date pat_bdate' id='".$post->id."'>".$post->pat_bdate."</td>".
-                               "<td class='edit pat_lname' id='".$post->id."'>".$post->pat_lname."</td>".
-                               "<td class='edit pat_fname' id='".$post->id."'>".$post->pat_fname."</td>".
-                               "<td class='edit weight' id='".$post->id."'>".$post->weight."</td>".
-                               "<td class='edit height' id='".$post->id."'>".$post->height."</td>".
-                               "<td class='edit age' id='".$post->id."'>".$post->age."</td>".
-                               "<td class='edit sex' id='".$post->id."'>".$post->sex."</td>".
-                               "<td class='edit mother_name' id='".$post->id."'>".$post->mother_name."</td>".
-                               "<td class='edit address' id='".$post->id."'>".$post->address."</td>".
-                               "<td><a href='posts/".$post->id."'><p>View Profile</p></a><td>".
-                               "<td><a href='checkup/".$post->id."'><p>Check Up</p></a><td>".
-                               "<td><a href='immunization/".$post->id."'><p>Immunization</p></a><td>".
-                               "<td><a href='pdf/".$post->id."' target='_blank'><p>Download PDF</p></a><td></tr>";
+            if ($patients) {
+                foreach ($patients as  $patient) {
+                    $output .= "<tr><td class='date patient_registration_date' id='".$patient->PatientID."'>".$patient->patient_registration_date."</td>".
+                               "<td class='date patient_bdate' id='".$patient->PatientID."'>".$patient->patient_bdate."</td>".
+                               "<td class='edit patient_lname' id='".$patient->PatientID."'>".$patient->patient_lname."</td>".
+                               "<td class='edit patient_fname' id='".$patient->PatientID."'>".$patient->patient_fname."</td>".
+                               "<td class='edit patient_weight' id='".$patient->PatientID."'>".$patient->patient_weight."</td>".
+                               "<td class='edit patient_height' id='".$patient->PatientID."'>".$patient->patient_height."</td>".
+                               "<td class='edit patient_age' id='".$patient->PatientID."'>".$patient->patient_age."</td>".
+                               "<td class='edit patient_sex' id='".$patient->PatientID."'>".$patient->patient_sex."</td>".
+                               "<td class='edit patient_mother_name' id='".$patient->PatientID."'>".$patient->patient_mother_name."</td>".
+                               "<td class='edit patient_address' id='".$patient->PatientID."'>".$patient->patient_address."</td>".
+                               "<td><a href='posts/".$patient->PatientID."'><p>View Profile</p></a><td>".
+                               "<td><a href='checkup/".$patient->PatientID."'><p>Check Up</p></a><td>".
+                               "<td><a href='immunization/".$patient->PatientID."'><p>Immunization</p></a><td>".
+                               "<td><a href='pdf/".$patient->PatientID."' target='_blank'><p>Download PDF</p></a><td></tr>";
 
                               
                 }
@@ -232,7 +244,7 @@ class PostController extends Controller
         
     }
     public function pdf($id){
-        $post = Post::find($id);
+        $patient = Patient::where('PatientID', '=', $id)->first();
 
         $immunizationstatus = Immunization::where('p_id', '=' , $id)->orderBy('id','desc')->get();
 
@@ -260,7 +272,7 @@ class PostController extends Controller
          }
 
 
-        $pdf = PDF::loadView('pdf/pdf',['posts' => $post,'vaccinationdates' => $vaccination_date]);
+        $pdf = PDF::loadView('pdf/pdf',['patients' => $patient,'vaccinationdates' => $vaccination_date]);
         $pdf->setPaper('A4', 'landscape');
 
         return $pdf->stream('invoice.pdf');

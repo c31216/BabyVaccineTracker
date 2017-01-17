@@ -8,26 +8,26 @@
             <th>Date of birth</th>
             <th>Last name</th>
             <th>First name</th> 
-            <th>Weight</th>
-            <th>Height</th>
-            <th>Age</th>
-            <th>Sex</th>
+            <th>patient_weight</th>
+            <th>patient_height</th>
+            <th>patient_age</th>
+            <th>patient_sex</th>
             <th>Name of mother</th>
-            <th>Address</th>
+            <th>patient_address</th>
           </tr>
         </thead>
         <tbody>
             <tr class="active">
-              <td>{{$posts->created_at}}</td>
-              <td>{{$posts->pat_bdate}}</td>
-              <td>{{$posts->pat_lname}}</td>
-              <td>{{$posts->pat_fname}}</td>
-              <td>{{$posts->weight}}</td>
-              <td>{{$posts->height}}</td>
-              <td>{{$posts->pat_lname}}</td>
-              <td>{{$posts->sex}}</td>
-              <td>{{$posts->mother_name}}</td>
-              <td>{{$posts->address}}</td>
+              <td>{{$patients->created_at}}</td>
+              <td>{{$patients->patient_bdate}}</td>
+              <td>{{$patients->patient_lname}}</td>
+              <td>{{$patients->patient_fname}}</td>
+              <td>{{$patients->patient_patient_weight}}</td>
+              <td>{{$patients->patient_patient_height}}</td>
+              <td>{{$patients->patient_lname}}</td>
+              <td>{{$patients->patient_patient_sex}}</td>
+              <td>{{$patients->patient_patient_mother_name}}</td>
+              <td>{{$patients->patient_patient_address}}</td>
             </tr>
         </tbody>
       </table>

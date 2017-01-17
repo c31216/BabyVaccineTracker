@@ -21,8 +21,8 @@ class Checkups extends Migration
             $table->string('doctor');
             $table->integer('p_id');
             $table->date('checkup_date');
-            $table->integer('weight');
-            $table->integer('height');
+            $table->integer('patient_weight');
+            $table->integer('patient_height');
             $table->timestamps();
         });
     }

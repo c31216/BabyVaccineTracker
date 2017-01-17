@@ -14,21 +14,21 @@ $(document).ready(function(){
 	addrecord.click(function(e){
 		e.preventDefault();
 		clicked_addrecord = true;
-		$("#p_list").prepend('<tr id="active"><td><input type="text" name="registration_date" value="'+output+'" data-toggle="datepicker" class="col-xs-12" ></input></td>'+
-								'<td><input type="text" name="pat_bdate" data-toggle="datepicker" value="'+output+'" id="daterange" class="col-xs-12 docs-date"></input></td>'+
-								'<td><input type="text" name="pat_lname" class="col-xs-12"></input></td>'+
-								'<td><input type="text" name="pat_fname" class="col-xs-12""></input></td>'+
-								'<td><input type="number" name="weight" value="0" class="col-xs-12"></input></td>'+
-								'<td><input type="number" name="height" value="0" class="col-xs-12"></input></td>'+
-								'<td><input type="number" name="age" value="0" class="col-xs-12"></input></td>'+
-								'<td><input type="text" name="sex" maxlength="1" class="col-xs-12"></input></td>'+
-								'<td><input type="text" name="mother_name" class="col-xs-12"></input></td>'+
-								'<td><input type="text" name="address" class="col-xs-12"></input></td>'+
-								'<td id="hidden"><input type="text" name="pat_uname" class="col-xs-12"></input></td>'+
-								'<td id="hidden"><input type="text" name="pat_pass" class="col-xs-12"></input></td>'+ csrf+
+		$("#p_list").prepend('<tr id="active"><td><input type="text" name="patient_registration_date" value="'+output+'" data-toggle="datepicker" class="col-xs-12" ></input></td>'+
+								'<td><input type="text" name="patient_bdate" data-toggle="datepicker" value="'+output+'" id="daterange" class="col-xs-12 docs-date"></input></td>'+
+								'<td><input type="text" name="patient_lname" class="col-xs-12"></input></td>'+
+								'<td><input type="text" name="patient_fname" class="col-xs-12""></input></td>'+
+								'<td><input type="number" name="patient_weight" value="0" class="col-xs-12"></input></td>'+
+								'<td><input type="number" name="patient_height" value="0" class="col-xs-12"></input></td>'+
+								'<td><input type="number" name="patient_age" value="0" class="col-xs-12"></input></td>'+
+								'<td><input type="text" name="patient_sex" maxlength="1" class="col-xs-12"></input></td>'+
+								'<td><input type="text" name="patient_mother_name" class="col-xs-12"></input></td>'+
+								'<td><input type="text" name="patient_address" class="col-xs-12"></input></td>'+
+								'<td id="hidden"><input type="text" name="patient_uname" class="col-xs-12"></input></td>'+
+								'<td id="hidden"><input type="text" name="patient_pass" class="col-xs-12"></input></td>'+ csrf+
 							'</tr>');
 		event.stopPropagation();
-		$("tr#active td input[name=pat_lname]").focus();
+		$("tr#active td input[name=patient_lname]").focus();
 		addrecord.hide();
 	  	$('[data-toggle="datepicker"]').datepicker({
 	  		format: 'yyyy-mm-dd'
@@ -40,40 +40,63 @@ $(document).ready(function(){
 
 		  if(event.keyCode == 13){
 
-		    pat_bdate = $("input[name=pat_bdate]").val();
-			var pat_lname = $("input[name=pat_lname]").val();
-			var pat_fname = $("input[name=pat_fname]").val();
-			var weight = $("input[name=weight]").val();
-			var height = $("input[name=height]").val();
-			var age = $("input[name=age]").val();
-			var sex = $("input[name=sex]").val();
-			var mother_name = $("input[name=mother_name]").val();
-			var address = $("input[name=address]").val();
-			var registration_date = $("input[name=registration_date]").val();
-			var pat_uname = $("input[name=pat_uname]").val();
-			var pat_pass = $("input[name=pat_pass]").val();
+		  	var valid_lic_num = /^(?=.{6,255}$)[a-zA-Z0-9]+(?:_[a-zA-Z0-9]+)*$/;
+		    var raw_patient_uname =  $("input[name=patient_uname]").val();
+		    var raw_patient_pass =  $("input[name=patient_pass]").val();
+		 	
+		    if (valid_lic_num.test(raw_patient_uname)) {  
+				var patient_uname = $("input[name=patient_uname]").val();
+				alert('success');
+		    } else {
+		        $("input[name=patient_uname]").addClass("required");
+		    }
 
-			var pat_bdate = pat_bdate.replace(/\//g, "-");
-			var dateAr = pat_bdate.split('-');
-			var pat_bdate = dateAr[0] + '-' + dateAr[1] + '-' + dateAr[2].slice(-2);
 
-			
+		    if (valid_lic_num.test(raw_patient_pass)) {  
+				var patient_pass = $("input[name=patient_pass]").val();
+				alert('success');
+		    } else {
+		        $("input[name=patient_pass]").addClass("required");
+		    }
+
+
 			$('tr td input').filter(function() {
 			    return !this.value;
 			}).attr("placeholder", "Required").addClass("required");
 
+		    patient_bdate = $("input[name=patient_bdate]").val();
+			var patient_lname = $("input[name=patient_lname]").val();
+			var patient_fname = $("input[name=patient_fname]").val();
+			var patient_weight = $("input[name=patient_weight]").val();
+			var patient_height = $("input[name=patient_height]").val();
+			var patient_age = $("input[name=patient_age]").val();
+			var patient_sex = $("input[name=patient_sex]").val();
+			var patient_mother_name = $("input[name=patient_mother_name]").val();
+			var patient_address = $("input[name=patient_address]").val();
+			var patient_registration_date = $("input[name=patient_registration_date]").val();
+
+			var patient_bdate = patient_bdate.replace(/\//g, "-");
+			var dateAr = patient_bdate.split('-');
+			var patient_bdate = dateAr[0] + '-' + dateAr[1] + '-' + dateAr[2].slice(-2);
+
+
 			$.ajax({
 	          type: 'POST',
 	          url: add,
-	          data: {pat_uname:pat_uname,pat_pass:pat_pass,registration_date:registration_date,pat_bdate:pat_bdate,pat_lname:pat_lname,pat_fname:pat_fname,weight:weight,height:height,age:age,sex:sex,mother_name:mother_name,address:address,_token:token},
+	          data: {patient_uname:patient_uname,patient_pass:patient_pass,patient_registration_date:patient_registration_date,patient_bdate:patient_bdate,patient_lname:patient_lname,patient_fname:patient_fname,patient_weight:patient_weight,patient_height:patient_height,patient_age:patient_age,patient_sex:patient_sex,patient_mother_name:patient_mother_name,patient_address:patient_address,_token:token},
 	          success: function(id){
-	          	$("input[name=pat_pass]").remove();
-	          	$("input[name=pat_uname]").remove();
+	          	// if (id.input) {
+	          	// 	alert('sds');
+	          	// }else{
+	          	// 	alert();
+	          	// }
+	          	$("input[name=patient_pass]").remove();
+	          	$("input[name=patient_uname]").remove();
 
-	          	$( "input[name!='registration_date'][name!='pat_bdate']").closest('td').addClass('edit');
+	          	$( "input[name!='patient_registration_date'][name!='patient_bdate']").closest('td').addClass('edit');
 
-	          	$("input[name='registration_date']").closest("td").addClass("date");
-	          	$("input[name='pat_bdate']").closest("td").addClass("date");
+	          	$("input[name='patient_registration_date']").closest("td").addClass("date");
+	          	$("input[name='patient_bdate']").closest("td").addClass("date");
 
 	          	$("tr#active td input").each(function(){
 	          		$(this).closest('td').append($(this).val()).addClass($(this).attr('name')).attr('id', id);

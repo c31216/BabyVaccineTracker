@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 
 use App\Immunization;
-use App\Post;
+use App\Patient;
 use App\Vaccine;
 use Session;
 use App\MedicalPersonnel;
@@ -35,7 +35,7 @@ class ImmunizeController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created resource in storpatient_age.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -48,8 +48,8 @@ class ImmunizeController extends Controller
                 'midwife' => 'required|max:255',
                 'vaccine_id' => 'required|numeric|same:expected_vaccine',
                 'description' => 'required|max:255',
-                'weight' => 'required|max:255|numeric',
-                'height' => 'required|max:255|numeric',
+                'patient_weight' => 'required|max:255|numeric',
+                'patient_height' => 'required|max:255|numeric',
         ]);
         $immunizationstatus = new Immunization;
         
@@ -58,8 +58,8 @@ class ImmunizeController extends Controller
         $immunizationstatus->midwife = $request->midwife;
         $immunizationstatus->vaccine_id = $request->vaccine_id;
         $immunizationstatus->description = $request->description;
-        $immunizationstatus->weight = $request->weight;
-        $immunizationstatus->height = $request->height;
+        $immunizationstatus->patient_weight = $request->patient_weight;
+        $immunizationstatus->patient_height = $request->patient_height;
 
         $immunizationstatus->save();
 
@@ -75,15 +75,17 @@ class ImmunizeController extends Controller
      */
     public function show($id)
     {
-        $post = Post::find($id);
+        $patient = Patient::where('PatientID', '=', $id)->first();
+
         $medicalpersonnel = MedicalPersonnel::where('role', 'midwife')->get();
+
         $immunizationstatus = Immunization::join('vaccines', 'vaccines.id', '=', 'immunizations.vaccine_id')
             ->select('immunizations.*', 'vaccines.name')
             ->where('p_id','=', $id)
             ->get();
 
         $TookVaccine = Vaccine::whereDoesntHave('users', function($q) use($id) {
-         $q->where('posts.id', $id);
+         $q->where('patients.PatientID', $id);
         })->get();
 
         if ($TookVaccine->isEmpty()) {
@@ -91,7 +93,7 @@ class ImmunizeController extends Controller
          }
 
         $vaccine = Vaccine::all();
-        return view('immunization.show')->withPosts($post)
+        return view('immunization.show')->withPatients($patient)
         ->withImmunizationstatuses($immunizationstatus)
         ->withTookvaccines($TookVaccine)->withVaccines($vaccine)
         ->withMedicalpersonnels($medicalpersonnel);
@@ -109,7 +111,7 @@ class ImmunizeController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified resource in storpatient_age.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -123,8 +125,8 @@ class ImmunizeController extends Controller
             'midwife' => 'required|max:255',
             'vaccine_id' => 'required|numeric',
             'description' => 'required|max:255',
-            'weight' => 'required|max:255|numeric',
-            'height' => 'required|max:255|numeric',
+            'patient_weight' => 'required|max:255|numeric',
+            'patient_height' => 'required|max:255|numeric',
         ]);
 
         $immunizationstatus = Immunization::find($id);
@@ -133,8 +135,8 @@ class ImmunizeController extends Controller
         $immunizationstatus->midwife = $request->midwife;
         $immunizationstatus->vaccine_id = $request->vaccine_id;
         $immunizationstatus->description = $request->description;
-        $immunizationstatus->weight = $request->weight;
-        $immunizationstatus->height = $request->height;
+        $immunizationstatus->patient_weight = $request->patient_weight;
+        $immunizationstatus->patient_height = $request->patient_height;
 
 
         $immunizationstatus->save();
@@ -144,7 +146,7 @@ class ImmunizeController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified resource from storpatient_age.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response

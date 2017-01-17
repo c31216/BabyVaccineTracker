@@ -12,12 +12,12 @@
             <th>Date of birth</th>
             <th>Last name</th>
             <th>First name</th> 
-            <th>patient_weight</th>
-            <th>patient_height</th>
-            <th>patient_age</th>
-            <th>patient_sex</th>
+            <th>Weight</th>
+            <th>Height</th>
+            <th>Age</th>
+            <th>Sex</th>
             <th>Name of mother</th>
-            <th>patient_address</th>
+            <th>Address</th>
           </tr>
         </thead>
         <tbody>

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 
 use App\Immunization;
-use App\Post;
+use App\Patient;
 use App\Vaccine;
 use App\User;
 
@@ -38,7 +38,7 @@ class SmsController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created resource in storpatient_age.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -71,7 +71,7 @@ class SmsController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified resource in storpatient_age.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -83,7 +83,7 @@ class SmsController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified resource from storpatient_age.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -95,14 +95,14 @@ class SmsController extends Controller
 
     public function filter(Request $request){
 
-        // $posts = Post::join('immunizations', 'immunizations.p_id', '=', 'posts.id')
-        //     ->select(max(['immunizations.p_id']),'posts.*')
+        // $patients = Patient::join('immunizations', 'immunizations.p_id', '=', 'patients.PatientID')
+        //     ->select(max(['immunizations.p_id']),'patients.*')
         //     ->where('vaccine_id', '!=' , $request->vaccine_id)
         //     ->groupBy('p_id')
         //     ->get();
         $vaccine_id = $request->vaccine_id;
 
-        $users = Post::whereDoesntHave('users', function($q) use($vaccine_id){
+        $users = Patient::whereDoesntHave('users', function($q) use($vaccine_id){
             $q->where('vaccine_id', '=', $vaccine_id);
         })->get();
 
@@ -112,14 +112,14 @@ class SmsController extends Controller
         }else{    
 
             foreach ($users as $user) {
-            echo "<input type='checkbox' class='users' checked name='".$user->id."' value='".$user->id."'> " . $user->pat_lname . ", " . $user->pat_fname . " <br>";
+            echo "<input type='checkbox' class='users' checked name='".$user->id."' value='".$user->id."'> " . $user->patient_lname . ", " . $user->patient_fname . " <br>";
             }
         }
 
        
         
-        // foreach ($posts as $post) {
-        //    echo "<p>" . $post->pat_lname . ", " . $post->pat_fname . "</p>";
+        // foreach ($patients as $patient) {
+        //    echo "<p>" . $patient->patient_lname . ", " . $patient->patient_fname . "</p>";
         // }
 
     }

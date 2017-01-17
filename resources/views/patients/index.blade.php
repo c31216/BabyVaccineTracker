@@ -24,17 +24,6 @@
         </form>      
         <br>
 
-    <div class="dropdown">
-      <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select
-      <span class="caret"></span></button>
-      <ul class="dropdown-menu">
-        @foreach($vaccines as $vaccine)
-          <li><a href="#">{{$vaccine->name}}</a></li>
-        @endforeach
-        
-      </ul>
-    </div>
-
     <div class="table-responsive">
       <table class="table table-hover">
         <thead>
@@ -43,12 +32,12 @@
             <th>Date of birth</th>
             <th>Last name</th>
             <th>First name</th> 
-            <th>patient_weight lb(s)</th>
-            <th>patient_height in</th>
-            <th>patient_age</th>
-            <th>patient_sex</th>
+            <th>Weight</th>
+            <th>Height</th>
+            <th>Age</th>
+            <th>Sex</th>
             <th>Name of mother</th>
-            <th>patient_address</th>             
+            <th>Address</th>             
 
           </tr>
         </thead>
@@ -57,16 +46,16 @@
         <tbody id="p_list">
           @foreach($patients as $patient)
             <tr>
-              <td class="date patient_registration_date" id="{{$patient->PatientID}}">{{$patient->patient_patient_registration_date}}</td>
+              <td class="date patient_registration_date" id="{{$patient->PatientID}}">{{$patient->patient_registration_date}}</td>
               <td class="date patient_bdate" id="{{$patient->PatientID}}">{{$patient->patient_bdate}}</td>
               <td class="edit patient_lname" id="{{$patient->PatientID}}">{{$patient->patient_lname}}</td>
               <td class="edit patient_fname" id="{{$patient->PatientID}}">{{$patient->patient_fname}}</td>
-              <td class="edit patient_weight" id="{{$patient->PatientID}}">{{$patient->patient_patient_weight}}</td>
-              <td class="edit patient_height" id="{{$patient->PatientID}}">{{$patient->patient_patient_height}}</td>
-              <td class="edit patient_age" id="{{$patient->PatientID}}">{{$patient->patient_patient_age}}</td>
-              <td class="patient_sex" id="{{$patient->PatientID}}">{{$patient->patient_patient_sex}}</td>
-              <td class="edit patient_mother_name" id="{{$patient->PatientID}}">{{$patient->patient_patient_mother_name}}</td>
-              <td class="edit patient_address" id="{{$patient->PatientID}}">{{$patient->patient_patient_address}}</td>
+              <td class="edit patient_weight" id="{{$patient->PatientID}}">{{$patient->patient_weight}}</td>
+              <td class="edit patient_height" id="{{$patient->PatientID}}">{{$patient->patient_height}}</td>
+              <td class="edit patient_age" id="{{$patient->PatientID}}">{{$patient->patient_age}}</td>
+              <td class="patient_sex" id="{{$patient->PatientID}}">{{$patient->patient_sex}}</td>
+              <td class="edit patient_mother_name" id="{{$patient->PatientID}}">{{$patient->patient_mother_name}}</td>
+              <td class="edit patient_address" id="{{$patient->PatientID}}">{{$patient->patient_address}}</td>
               {{-- <td><input type="hidden" name="_method" value="PUT" /></td> --}}
 
               <td>

@@ -1,4 +1,6 @@
-$("#messagebox").hide();
+
+
+
 $('select').on('change', function (e) {
 	valueSelected = this.value;
 	if (valueSelected) {
@@ -22,4 +24,5 @@ $('select').on('change', function (e) {
 		});
 	}
 });
+$("#messagebox").hide();
 

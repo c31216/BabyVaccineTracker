@@ -31,7 +31,4 @@ class CreateMedicalPersonnelsTable extends Migration
         Schema::dropIfExists('medical_personnels');
     }
 
-    foreach(){
-        
-    }
 }

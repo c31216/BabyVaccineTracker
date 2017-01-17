@@ -20,8 +20,8 @@ class CreateImmunizationsTable extends Migration
             $table->string('midwife');
             $table->integer('p_id');
             $table->date('vaccination_received');
-            $table->integer('weight');
-            $table->integer('height');
+            $table->integer('patient_weight');
+            $table->integer('patient_height');
             $table->timestamps();
         });
     }

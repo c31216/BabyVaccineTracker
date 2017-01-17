@@ -11,7 +11,7 @@
 
 @section('content')
 <div class="container">
-	<h1 class="title-page">{{$posts->pat_lname.', '.$posts->pat_fname}}</h1>
+	<h1 class="title-page">{{$patients->patient_lname.', '.$patients->patient_fname}}</h1>
 	<!-- Trigger the modal with a button -->
 	<br>
 
@@ -40,13 +40,13 @@
 			    <div class="row">
 				  <div class="form-group col-xs-5 col-lg-3">
 
-				    {{ Form::label('weight', "Weight") }}
-				    {{ Form::number('weight', 0, ['class' => 'form-control', 'required' => '', 'maxlength' => '255','data-parsley-type' => 'number']) }}
+				    {{ Form::label('patient_weight', "Weight") }}
+				    {{ Form::number('patient_weight', 0, ['class' => 'form-control', 'required' => '', 'maxlength' => '255','data-parsley-type' => 'number']) }}
 				  </div>
 				  <div class="form-group col-xs-5 col-lg-3">
 
-				    {{ Form::label('height', "Height") }}
-				    {{ Form::number('height', 0, ['class' => 'form-control', 'required' => '', 'maxlength' => '255','data-parsley-type' => 'number']) }}
+				    {{ Form::label('patient_height', "Height") }}
+				    {{ Form::number('patient_height', 0, ['class' => 'form-control', 'required' => '', 'maxlength' => '255','data-parsley-type' => 'number']) }}
 				  </div>
 			    </div>
 
@@ -60,7 +60,7 @@
 						@endforeach
 
 					</select>
-				    {{ Form::hidden('p_id', $posts->id) }}
+				    {{ Form::hidden('p_id', $patients->PatientID) }}
 					
 				  </div>
 			    </div>
@@ -116,8 +116,8 @@
 	          <th>Symptoms</th>
 	          <th>Prescription</th>
 	          <th>Description</th>
-	          <th>Weight</th>
-	          <th>Height</th>
+	          <th>patient_weight</th>
+	          <th>patient_height</th>
 	        </tr>
 	      </thead>
 
@@ -131,8 +131,8 @@
 	            <td><p>{{$checklist->symptoms}}</p></td>
 	            <td><p>{{$checklist->prescription}}</p></td>
 	            <td><p>{{$checklist->description}}</p></td>
-	            <td><p>{{$checklist->weight}}</p></td>
-	            <td><p>{{$checklist->height}}</p></td>
+	            <td><p>{{$checklist->patient_weight}}</p></td>
+	            <td><p>{{$checklist->patient_height}}</p></td>
 	            {{-- <td><button type="button" class="btn btn-success" id="edit" data-id="{{$checklist->id}}" data-toggle="modal" data-target="#edit_{{$checklist->id}}">Edit</button></td>
  --}}
 	           </tr>
@@ -199,8 +199,8 @@
 						    <div class="row">
 							  <div class="form-group col-xs-5 col-lg-7">
 
-							    {{ Form::label('weight', "Weight") }}
-							    {{ Form::number('weight', $checklist->weight, ['class' => 'form-control', 'required' => '', 'maxlength' => '255']) }}
+							    {{ Form::label('patient_weight', "patient_weight") }}
+							    {{ Form::number('patient_weight', $checklist->patient_weight, ['class' => 'form-control', 'required' => '', 'maxlength' => '255']) }}
 							    {{ Form::hidden('p_id', $checklist->p_id) }}
 
 							  </div>
@@ -209,8 +209,8 @@
 						    <div class="row">
 							  <div class="form-group col-xs-5 col-lg-7">
 
-							    {{ Form::label('height', "Height") }}
-							    {{ Form::text('height', $checklist->height, ['class' => 'form-control', 'required' => '', 'maxlength' => '255']) }}
+							    {{ Form::label('patient_height', "patient_height") }}
+							    {{ Form::text('patient_height', $checklist->patient_height, ['class' => 'form-control', 'required' => '', 'maxlength' => '255']) }}
 
 							  </div>
 						    </div>

@@ -29,7 +29,7 @@ class DoctorController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created resource in storpatient_age.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -62,7 +62,7 @@ class DoctorController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified resource in storpatient_age.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -74,7 +74,7 @@ class DoctorController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified resource from storpatient_age.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response

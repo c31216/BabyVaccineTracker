@@ -8,7 +8,7 @@ use App\Http\Requests;
 
 use App\Checkup;
 use App\MedicalPersonnel;
-use App\Post;
+use App\Patient;
 use Session;
 
 class CheckupController extends Controller
@@ -34,7 +34,7 @@ class CheckupController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created resource in storpatient_age.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -48,8 +48,8 @@ class CheckupController extends Controller
                 'symptoms' => 'required|max:255',
                 'prescription' => 'required|max:255',
                 'description' => 'required|max:255',
-                'weight' => 'required|max:255|numeric',
-                'height' => 'required|max:255|numeric',
+                'patient_weight' => 'required|max:255|numeric',
+                'patient_height' => 'required|max:255|numeric',
         ]);
         $checkup = new Checkup;
 
@@ -59,8 +59,8 @@ class CheckupController extends Controller
         $checkup->symptoms = $request->symptoms;
         $checkup->prescription = $request->prescription;
         $checkup->description = $request->description;
-        $checkup->weight = $request->weight;
-        $checkup->height = $request->height;
+        $checkup->patient_weight = $request->patient_weight;
+        $checkup->patient_height = $request->patient_height;
 
         $checkup->save();
 
@@ -77,10 +77,10 @@ class CheckupController extends Controller
      */
     public function show($id)
     {
-        $post = Post::find($id);
+        $patient = Patient::find($id);
         $medicalpersonnel = MedicalPersonnel::where('role', 'doctor')->get();
         $checklist = Checkup::where('p_id', '=' , $id)->orderBy('id', 'desc')->get();
-        return view('checkup.show')->withPosts($post)->withChecklists($checklist)->withMedicalpersonnels($medicalpersonnel);
+        return view('checkup.show')->withPatients($patient)->withChecklists($checklist)->withMedicalpersonnels($medicalpersonnel);
     }
 
     /**
@@ -95,7 +95,7 @@ class CheckupController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified resource in storpatient_age.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -111,8 +111,8 @@ class CheckupController extends Controller
             'symptoms' => 'required|max:255',
             'prescription' => 'required|max:255',
             'description' => 'required|max:255',
-            'weight' => 'required|max:255|numeric',
-            'height' => 'required|max:255|numeric',
+            'patient_weight' => 'required|max:255|numeric',
+            'patient_height' => 'required|max:255|numeric',
         ]);
 
         $checklist = Checkup::find($id);
@@ -122,8 +122,8 @@ class CheckupController extends Controller
         $checklist->symptoms = $request->symptoms;
         $checklist->prescription = $request->prescription;
         $checklist->description = $request->description;
-        $checklist->weight = $request->weight;
-        $checklist->height = $request->height;
+        $checklist->patient_weight = $request->patient_weight;
+        $checklist->patient_height = $request->patient_height;
 
 
         $checklist->save();
@@ -133,7 +133,7 @@ class CheckupController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified resource from storpatient_age.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
