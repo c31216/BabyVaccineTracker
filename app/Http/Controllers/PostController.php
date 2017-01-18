@@ -178,7 +178,7 @@ class PostController extends Controller
         // }
         // DB::update("UPDATE patients SET patient_fname = ? WHERE PatientID = ?", ['dfabvbda', '1']);
         
-        $post = Post::find($request->id);
+        $post = Patient::find($request->id);
 
         $post->patient_fname = $request->value;
 
