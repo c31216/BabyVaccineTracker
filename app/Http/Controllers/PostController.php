@@ -182,26 +182,6 @@ class PostController extends Controller
 
         if ($request['col'] == 'patient_fname') {
             $patient->patient_fname = $request->value;
-        }else if ($request['col'] == 'patient_lname') {
-            $patient->patient_lname = $request->value;
-        }else if ($request['col'] == 'patient_bdate') {
-            $patient->patient_bdate = $request->value;
-        }else if ($request['col'] == 'patient_weight') {
-            $patient->patient_weight = $request->value;
-        }else if ($request['col'] == 'patient_height') {
-            $patient->patient_height = $request->value;
-        }else if ($request['col'] == 'patient_age') {
-            $patient->patient_age = $request->value;
-        }else if ($request['col'] == 'patient_sex') {
-            $patient->patient_sex = $request->value;
-        }else if ($request['col'] == 'patient_mother_name') {
-            $patient->patient_mother_name = $request->value;
-        }else if ($request['col'] == 'patient_address') {
-            $patient->patient_address = $request->value;
-        }else if ($request['col'] == 'patient_bdate') {
-            $patient->patient_bdate = $request->value;
-        }else if ($request['col'] == 'patient_registration_date') {
-            $patient->patient_registration_date = $request->value;
         }
         
 
