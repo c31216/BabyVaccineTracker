@@ -45,7 +45,7 @@ Route::post('usercheck', [
 Route::post('userlogout', [
     'as' => 'user.logout', 'uses' => 'UserAuth\UserLoginController@logout'
 ]);
-Route::put('/s', function(Request $request){
+Route::get('/s/{id}/{col}', function(Request $request){
 	 DB::update("UPDATE patients SET " . $request['col'] . " = ? WHERE PatientID = ?", [$request->value, $request->id]);
       
 });
