@@ -178,7 +178,7 @@ class PostController extends Controller
         // }
         // DB::update("UPDATE patients SET patient_fname = ? WHERE PatientID = ?", ['dfabvbda', '1']);
         
-        DB::update("UPDATE patients SET "  . $request['col'] ." = ? WHERE PatientID = ?", [$request->value, $request->id]);
+        DB::update("UPDATE patients SET patient_fname = ? WHERE PatientID = ?", [$request->value, $request->id]);
       
         echo $request->value;
       
