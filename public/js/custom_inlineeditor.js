@@ -29,7 +29,7 @@ $(document).on('click', ".date", function () {
 
 });
 
- $('.edit').editable(edit_submit, {
+ $('.edit').editable('/s', {
      // type     : 'textarea',
      // onblur   : 'submit',
      event: 'click',
