@@ -180,7 +180,7 @@ class PostController extends Controller
         
         $patient = Patient::find($request->id);
 
-        if ('patient_fname' == 'patient_fname') {
+        if (1 == 1) {
             $patient->patient_fname = $request->value;
         }
         
