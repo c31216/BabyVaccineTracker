@@ -85,11 +85,7 @@ $(document).ready(function(){
 	          url: add,
 	          data: {patient_uname:patient_uname,patient_pass:patient_pass,patient_registration_date:patient_registration_date,patient_bdate:patient_bdate,patient_lname:patient_lname,patient_fname:patient_fname,patient_weight:patient_weight,patient_height:patient_height,patient_age:patient_age,patient_sex:patient_sex,patient_mother_name:patient_mother_name,patient_address:patient_address,_token:token},
 	          success: function(id){
-	          	// if (id.input) {
-	          	// 	alert('sds');
-	          	// }else{
-	          	// 	alert();
-	          	// }
+	         
 	          	$("input[name=patient_pass]").remove();
 	          	$("input[name=patient_uname]").remove();
 

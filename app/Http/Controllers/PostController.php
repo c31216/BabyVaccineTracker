@@ -12,7 +12,7 @@ use App\Immunization;
 use Session;
 use PDF;
 use Validator;
-
+use DB;
 
 class PostController extends Controller
 {
@@ -25,7 +25,7 @@ class PostController extends Controller
 
      public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth', ['except' => ['pdf']]);
     }
 
 
@@ -176,13 +176,10 @@ class PostController extends Controller
         //         'body' => 'required'
         //     ));
         // }
-        $patient = Patient::find($request->id);
-
-        $patient->$request['col'] = $request->value;
-
-        $patient->save();
-
+        // DB::update("UPDATE patients SET patient_fname = ? WHERE PatientID = ?", ['dfabvbda', '1']);
         
+        DB::update("UPDATE patients SET "  . $request['col'] ." = ? WHERE PatientID = ?", [$request->value, $request->id]);
+      
         echo $request->value;
       
 

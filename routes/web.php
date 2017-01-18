@@ -11,7 +11,10 @@
 |
 */
 
+use App\Patient;
+use Illuminate\Http\Request;
 
+use App\Http\Requests;
 
 Auth::routes();
 Route::resource('posts', 'PostController');
@@ -21,13 +24,31 @@ Route::resource('sms', 'SmsController');
 Route::get('search', [
     'as' => 'posts.search', 'uses' => 'PostController@search'
 ]);
+
+
 Route::post('user_filter', [
     'as' => 'sms.filter', 'uses' => 'SmsController@filter'
 ]);
 
 Route::get('pdf/{id}', [
     'as' => 'posts.pdf', 'uses' => 'PostController@pdf'
+])->middleware('UserAndAdmin');
+
+Route::get('userlogin', [
+    'as' => 'user.login', 'uses' => 'UserAuth\UserLoginController@login'
 ]);
+
+Route::post('usercheck', [
+    'as' => 'user.check', 'uses' => 'UserAuth\UserLoginController@check'
+]);
+
+Route::post('userlogout', [
+    'as' => 'user.logout', 'uses' => 'UserAuth\UserLoginController@logout'
+]);
+
+Route::get('home', [
+    'as' => 'user.index', 'uses' => 'UserAuth\UserLoginController@index'
+])->middleware('checksession');
 
 Route::get('/', function(){
 	return view('auth/login');

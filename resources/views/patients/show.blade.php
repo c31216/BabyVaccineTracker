@@ -86,7 +86,7 @@
       <table class="table table-bordered">
       <h3>TCL For Nutrition and EPI Program P2</h3>
         <tr>
-          <th rowspan="2">Date<br>Fully<br>Immunized<br>Child</th>
+          <th rowspan="2">P1 Date of<br>Completion</th>
           <th colspan="2">Rota Virus<br>Vaccine</th>
           <th colspan="4">Pneumococcal<br>Conjugate Vaccines (PCV)</th>
           <th colspan="6">Child Was Exclusively Breastfed</th>

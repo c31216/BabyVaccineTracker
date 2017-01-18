@@ -41,6 +41,7 @@ $(document).on('click', ".date", function () {
          $(this).addClass('success');
      }
  });
+
  $.editable.addInputType('datepicker', {
     element: function(settings, original) {
         var input = $('<input/>');
