@@ -14,9 +14,9 @@ class CreateMedicalPersonnelsTable extends Migration
     public function up()
     {
         Schema::create('medical_personnels', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->string('role');
+            $table->increments('MedicalpersonnelID');
+            $table->string('medicalpersonnel_name');
+            $table->string('medicalpersonnel_role');
             $table->timestamps();
         });
     }

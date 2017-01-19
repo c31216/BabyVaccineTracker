@@ -28,7 +28,7 @@ class UserLoginController extends Controller
     public function index(){
     	$PatientID = Session::get('PatientID');
     	$patient = Patient::find($PatientID);
-        $immunizationstatus = Immunization::where('p_id', '=' , $PatientID)->orderBy('id','desc')->get();
+        $immunizationstatus = Immunization::where('patient_id', '=' , $PatientID)->orderBy('id','desc')->get();
 
         $vaccination_date = [];
         $values = [];

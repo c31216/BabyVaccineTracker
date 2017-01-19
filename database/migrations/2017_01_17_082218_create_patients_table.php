@@ -24,6 +24,9 @@ class CreatePatientsTable extends Migration
             $table->integer('patient_age');
             $table->char('patient_sex');
             $table->string('patient_mother_name');
+            $table->string('patient_father_name');
+            $table->string('patient_guardian_name');
+            $table->decimal('patient_headcircumference');
             $table->string('patient_address');
             $table->date('patient_bdate');
             $table->date('patient_registration_date');

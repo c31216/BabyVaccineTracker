@@ -1,5 +1,5 @@
 
-
+	@section('title', 'Immunization')
 	@extends('main')
 
 	@section('stylesheets')
@@ -54,8 +54,8 @@
 				    <div class="row">
 					  <div class="form-group col-xs-5 col-lg-6">
 
-					    {{ Form::label('description', "Description") }}
-					    {{ Form::text('description', null, ['class' => 'form-control', 'required' => '', 'maxlength' => '255']) }}
+					    {{ Form::label('immunization_description', "Description") }}
+					    {{ Form::text('immunization_description', null, ['class' => 'form-control', 'required' => '', 'maxlength' => '255']) }}
 
 					  </div>
 				    </div>
@@ -75,15 +75,15 @@
 
 				    <div class="row">
 					  <div class="form-group col-xs-5 col-lg-6">
-
-					    <select class="form-control" name="midwife">
+						<label for="">Midwife</label>
+					    <select class="form-control" name="midwife_name">
 		
 						   	@foreach ($medicalpersonnels as $medicalpersonnel)
-								<option value="{{ $medicalpersonnel->name }}">{{ $medicalpersonnel->name }}</option>
+								<option value="{{ $medicalpersonnel->medicalpersonnel_name }}">{{ $medicalpersonnel->medicalpersonnel_name }}</option>
 							@endforeach
 
 						</select>
-					    {{ Form::hidden('p_id', $patients->PatientID) }}
+					    {{ Form::hidden('patient_id', $patients->PatientID) }}
 
 					  </div>
 				    </div>
@@ -96,7 +96,7 @@
 								<select class="form-control" id="a" name="vaccine_id">
 			
 								   	@foreach ($tookvaccines as $tookvaccine)
-										<option value="{{ $tookvaccine->id }}">{{ $tookvaccine->name }}</option>
+										<option value="{{ $tookvaccine->VaccineID }}">{{ $tookvaccine->vaccine_name }}</option>
 									@endforeach
 
 									{{ Form::hidden('expected_vaccine', null) }}
@@ -151,9 +151,9 @@
 
 		          <tr>
 		            <td><p>{{$immunizationstatus->vaccination_received}}</p></td>
-		            <td><p>{{$immunizationstatus->midwife}}</p></td>
-		            <td><p>{{$immunizationstatus->name}}</p></td>
-		            <td><p>{{$immunizationstatus->description}}</p></td>
+		            <td><p>{{$immunizationstatus->midwife_name}}</p></td>
+		            <td><p>{{$immunizationstatus->vaccine_name}}</p></td>
+		            <td><p>{{$immunizationstatus->immunization_description}}</p></td>
 		            <td><p>{{$immunizationstatus->patient_weight}}</p></td>
 		            <td><p>{{$immunizationstatus->patient_height}}</p></td>
 		            {{-- <td><button type="button" class="btn btn-success" id="edit" data-id="{{$immunizationstatus->id}}" data-toggle="modal" data-target="#edit_{{$immunizationstatus->id}}">Edit</button></td>
@@ -162,7 +162,7 @@
 
 
 		           <!-- Edit Modal -->
-					<div id="edit_{{$immunizationstatus->id}}" class="modal fade" role="dialog">
+					<div id="edit_{{$immunizationstatus->ImmunizationID}}" class="modal fade" role="dialog">
 					  <div class="modal-dialog">
 
 					    <!-- Modal content-->
@@ -172,7 +172,7 @@
 					        <h4 class="modal-title">Edit</h4>
 					      </div>
 					      <div class="modal-body">
-					        {!! Form::model($immunizationstatus, ['route' => ['immunization.update', $immunizationstatus->id ], 'method'=> 'PUT']) !!}
+					        {!! Form::model($immunizationstatus, ['route' => ['immunization.update', $immunizationstatus->ImmunizationID ], 'method'=> 'PUT']) !!}
 
 					        	<div class="row">
 								  <div class="form-group col-xs-5 col-lg-6">
@@ -187,7 +187,7 @@
 								  <div class="form-group col-xs-5 col-lg-6">
 
 								    {{ Form::label('midwife', "Midwife") }}
-								    {{ Form::text('midwife', $immunizationstatus->midwife, ['class' => 'form-control', 'required' => '', 'maxlength' => '255']) }}
+								    {{ Form::text('midwife', $immunizationstatus->midwife_name, ['class' => 'form-control', 'required' => '', 'maxlength' => '255']) }}
 
 								  </div>
 							    </div>
@@ -207,7 +207,7 @@
 								  <div class="form-group col-xs-5 col-lg-6">
 
 								    {{ Form::label('description', "Description") }}
-								    {{ Form::text('description', $immunizationstatus->description, ['class' => 'form-control', 'required' => '', 'maxlength' => '255']) }}
+								    {{ Form::text('description', $immunizationstatus->immunization_description, ['class' => 'form-control', 'required' => '', 'maxlength' => '255']) }}
 
 								  </div>
 							    </div>
@@ -217,7 +217,7 @@
 
 								    {{ Form::label('patient_weight', "Weight") }}
 								    {{ Form::number('patient_weight', $immunizationstatus->patient_weight, ['class' => 'form-control', 'required' => '', 'maxlength' => '255']) }}
-								    {{ Form::hidden('p_id', $immunizationstatus->p_id) }}
+								    {{ Form::hidden('patient_id', $immunizationstatus->patient_id) }}
 
 								  </div>
 								  <div class="form-group col-xs-5 col-lg-3">

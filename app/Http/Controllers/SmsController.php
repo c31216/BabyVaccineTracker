@@ -94,12 +94,6 @@ class SmsController extends Controller
     }
 
     public function filter(Request $request){
-
-        // $patients = Patient::join('immunizations', 'immunizations.p_id', '=', 'patients.PatientID')
-        //     ->select(max(['immunizations.p_id']),'patients.*')
-        //     ->where('vaccine_id', '!=' , $request->vaccine_id)
-        //     ->groupBy('p_id')
-        //     ->get();
         $vaccine_id = $request->vaccine_id;
 
         $users = Patient::whereDoesntHave('users', function($q) use($vaccine_id){

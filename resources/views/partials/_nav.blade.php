@@ -56,6 +56,17 @@
 		        	</a>
 		        </li>
 
+		        <li>
+		        	<a href="{{ route('report.index') }}">
+		        		<div class="row nav-icon">
+			        		<img src="/img/document-icon.png">
+			        	</div>
+			        	<div class="row">
+		        			Report
+		        		</div>
+		        	</a>
+		        </li>
+
 		    </ul>
 
 		    <div class="col-md-3 active-user">

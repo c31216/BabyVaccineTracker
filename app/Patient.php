@@ -10,6 +10,9 @@ class Patient extends Model
 	 protected $primaryKey = 'PatientID';
     public function users()
 	{
-		return $this->belongsToMany('App\Vaccine', 'immunizations', 'p_id', 'vaccine_id');
+		return $this->belongsToMany('App\Vaccine', 'immunizations', 'patient_id', 'vaccine_id');
 	}
+
+	
+	
 }

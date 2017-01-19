@@ -64,7 +64,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Manila',
 
     /*
     |--------------------------------------------------------------------------
@@ -232,6 +232,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'Nexmo' => \Nexmo\Laravel\Facade\Nexmo::class,
+        'Carbon' => 'Carbon\Carbon',
     ],
 
 ];

@@ -42,30 +42,30 @@ class CheckupController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-                'p_id' => 'required|max:255|numeric',
+                'patient_id' => 'required|max:255|numeric',
                 'checkup_date' => 'required|max:255|date',
-                'doctor' => 'required|max:255',
-                'symptoms' => 'required|max:255',
-                'prescription' => 'required|max:255',
-                'description' => 'required|max:255',
+                'doctor_name' => 'required|max:255',
+                'checkup_symptoms' => 'required|max:255',
+                'checkup_prescription' => 'required|max:255',
+                'checkup_description' => 'required|max:255',
                 'patient_weight' => 'required|max:255|numeric',
                 'patient_height' => 'required|max:255|numeric',
         ]);
         $checkup = new Checkup;
 
-        $checkup->p_id = $request->p_id;
+        $checkup->patient_id = $request->patient_id;
         $checkup->checkup_date = $request->checkup_date;
-        $checkup->doctor = $request->doctor;
-        $checkup->symptoms = $request->symptoms;
-        $checkup->prescription = $request->prescription;
-        $checkup->description = $request->description;
+        $checkup->doctor_name = $request->doctor_name;
+        $checkup->checkup_symptoms = $request->checkup_symptoms;
+        $checkup->checkup_prescription = $request->checkup_prescription;
+        $checkup->checkup_description = $request->checkup_description;
         $checkup->patient_weight = $request->patient_weight;
         $checkup->patient_height = $request->patient_height;
 
         $checkup->save();
 
         Session::flash('success' , 'Successfully Added.');
-        return redirect()->route('checkup.show',$checkup->p_id);
+        return redirect()->route('checkup.show',$checkup->patient_id);
 
     }
 
@@ -78,8 +78,8 @@ class CheckupController extends Controller
     public function show($id)
     {
         $patient = Patient::find($id);
-        $medicalpersonnel = MedicalPersonnel::where('role', 'doctor')->get();
-        $checklist = Checkup::where('p_id', '=' , $id)->orderBy('id', 'desc')->get();
+        $medicalpersonnel = MedicalPersonnel::where('medicalpersonnel_role', 'doctor')->get();
+        $checklist = Checkup::where('patient_id', '=' , $id)->orderBy('CheckupID', 'desc')->get();
         return view('checkup.show')->withPatients($patient)->withChecklists($checklist)->withMedicalpersonnels($medicalpersonnel);
     }
 
@@ -105,12 +105,12 @@ class CheckupController extends Controller
     {
 
         $this->validate($request, [
-            'p_id' => 'required|max:255|numeric',
+            'patient_id' => 'required|max:255|numeric',
             'checkup_date' => 'required|max:255|date',
-            'doctor' => 'required|max:255',
-            'symptoms' => 'required|max:255',
-            'prescription' => 'required|max:255',
-            'description' => 'required|max:255',
+            'doctor_name' => 'required|max:255',
+            'checkup_symptoms' => 'required|max:255',
+            'checkup_prescription' => 'required|max:255',
+            'checkup_description' => 'required|max:255',
             'patient_weight' => 'required|max:255|numeric',
             'patient_height' => 'required|max:255|numeric',
         ]);
@@ -118,10 +118,10 @@ class CheckupController extends Controller
         $checklist = Checkup::find($id);
 
         $checklist->checkup_date = $request->checkup_date;
-        $checklist->doctor = $request->doctor;
-        $checklist->symptoms = $request->symptoms;
-        $checklist->prescription = $request->prescription;
-        $checklist->description = $request->description;
+        $checklist->doctor_name = $request->doctor_name;
+        $checklist->checkup_symptoms = $request->checkup_symptoms;
+        $checklist->checkup_prescription = $request->checkup_prescription;
+        $checklist->checkup_description = $request->checkup_description;
         $checklist->patient_weight = $request->patient_weight;
         $checklist->patient_height = $request->patient_height;
 
@@ -129,7 +129,7 @@ class CheckupController extends Controller
         $checklist->save();
 
         Session::flash('success' , 'Changes Successfully saved.');
-        return redirect()->route('checkup.show',$checklist->p_id);
+        return redirect()->route('checkup.show',$checklist->patient_id);
     }
 
     /**

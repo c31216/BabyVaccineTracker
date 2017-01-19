@@ -49,7 +49,7 @@ html,body {
 }
 
 .nav.navbar-nav a {
-	padding: 32px 50px 32px 50px;
+	padding: 32px 38px 32px 38px;
 	border-right: solid 1px #ebebeb;
 }
 .navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover {

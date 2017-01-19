@@ -1,11 +1,9 @@
 @extends('main')
-
+@section('title', 'Check-Up')
 @section('stylesheets')
 
 	{!! Html::style('css/parsley.css') !!}
 	{!! Html::style('dist/datepicker.css') !!}
-
-
 
 @endsection
 
@@ -52,15 +50,15 @@
 
 			    <div class="row">
 				  <div class="form-group col-xs-5 col-lg-6">
-
-				    <select class="form-control" name="doctor">
+					<label for="">Doctor</label>
+				    <select class="form-control" name="doctor_name">
 	
 					   	@foreach ($medicalpersonnels as $medicalpersonnel)
-							<option value="{{ $medicalpersonnel->name }}">{{ $medicalpersonnel->name }}</option>
+							<option value="{{ $medicalpersonnel->medicalpersonnel_name }}">{{ $medicalpersonnel->medicalpersonnel_name }}</option>
 						@endforeach
 
 					</select>
-				    {{ Form::hidden('p_id', $patients->PatientID) }}
+				    {{ Form::hidden('patient_id', $patients->PatientID) }}
 					
 				  </div>
 			    </div>
@@ -68,8 +66,8 @@
 			    <div class="row">
 				  <div class="form-group col-xs-5 col-lg-6">
 
-				    {{ Form::label('description', "Description") }}
-				    {{ Form::text('description', null, ['class' => 'form-control', 'required' => '', 'maxlength' => '255']) }}
+				    {{ Form::label('checkup_description', "Description") }}
+				    {{ Form::text('checkup_description', null, ['class' => 'form-control', 'required' => '', 'maxlength' => '255']) }}
 
 				  </div>
 			    </div>
@@ -77,8 +75,8 @@
 			    <div class="row">
 				  <div class="form-group col-xs-5 col-lg-6">
 
-				    {{ Form::label('symptoms', "Symptoms") }}
-				    {{ Form::text('symptoms', null, ['class' => 'form-control', 'required' => '', 'maxlength' => '255']) }}
+				    {{ Form::label('checkup_symptoms', "Symptoms") }}
+				    {{ Form::text('checkup_symptoms', null, ['class' => 'form-control', 'required' => '', 'maxlength' => '255']) }}
 
 				  </div>
 			    </div>
@@ -86,8 +84,8 @@
 			    <div class="row">
 				  <div class="form-group col-xs-5 col-lg-6">
 
-				    {{ Form::label('prescription', "Prescription") }}
-				    {{ Form::text('prescription', null, ['class' => 'form-control', 'required' => '', 'maxlength' => '255']) }}
+				    {{ Form::label('checkup_prescription', "Prescription") }}
+				    {{ Form::text('checkup_prescription', null, ['class' => 'form-control', 'required' => '', 'maxlength' => '255']) }}
 				  </div>
 			    </div>
 			    
@@ -116,8 +114,8 @@
 	          <th>Symptoms</th>
 	          <th>Prescription</th>
 	          <th>Description</th>
-	          <th>patient_weight</th>
-	          <th>patient_height</th>
+	          <th>Weight</th>
+	          <th>Height</th>
 	        </tr>
 	      </thead>
 
@@ -127,10 +125,10 @@
 
 	          <tr>
 	            <td><p>{{$checklist->checkup_date}}</p></td>
-	            <td><p>{{$checklist->doctor}}</p></td>
-	            <td><p>{{$checklist->symptoms}}</p></td>
-	            <td><p>{{$checklist->prescription}}</p></td>
-	            <td><p>{{$checklist->description}}</p></td>
+	            <td><p>{{$checklist->doctor_name}}</p></td>
+	            <td><p>{{$checklist->checkup_symptoms}}</p></td>
+	            <td><p>{{$checklist->checkup_prescription}}</p></td>
+	            <td><p>{{$checklist->checkup_description}}</p></td>
 	            <td><p>{{$checklist->patient_weight}}</p></td>
 	            <td><p>{{$checklist->patient_height}}</p></td>
 	            {{-- <td><button type="button" class="btn btn-success" id="edit" data-id="{{$checklist->id}}" data-toggle="modal" data-target="#edit_{{$checklist->id}}">Edit</button></td>
@@ -139,7 +137,7 @@
 
 
 	           <!-- Edit Modal -->
-				<div id="edit_{{$checklist->id}}" class="modal fade" role="dialog">
+				<div id="edit_{{$checklist->CheckupID}}" class="modal fade" role="dialog">
 				  <div class="modal-dialog">
 
 				    <!-- Modal content-->
@@ -149,7 +147,7 @@
 				        <h4 class="modal-title">Edit</h4>
 				      </div>
 				      <div class="modal-body">
-				        {!! Form::model($checklist, ['route' => ['checkup.update', $checklist->id ], 'method'=> 'PUT']) !!}
+				        {!! Form::model($checklist, ['route' => ['checkup.update', $checklist->CheckupID ], 'method'=> 'PUT']) !!}
 
 				        	<div class="row">
 							  <div class="form-group col-xs-5 col-lg-7">
@@ -164,7 +162,7 @@
 							  <div class="form-group col-xs-5 col-lg-7">
 
 							    {{ Form::label('doctor', "Doctor") }}
-							    {{ Form::text('doctor', $checklist->doctor, ['class' => 'form-control', 'required' => '', 'maxlength' => '255']) }}
+							    {{ Form::text('doctor', $checklist->doctor_name, ['class' => 'form-control', 'required' => '', 'maxlength' => '255']) }}
 
 							  </div>
 						    </div>
@@ -172,8 +170,8 @@
 							<div class="row">
 							  <div class="form-group col-xs-5 col-lg-7">
 
-							    {{ Form::label('symptoms', "Symptoms") }}
-							    {{ Form::text('symptoms', $checklist->symptoms, ['class' => 'form-control', 'required' => '', 'maxlength' => '255']) }}
+							    {{ Form::label('checkup_symptoms', "Symptoms") }}
+							    {{ Form::text('checkup_symptoms', $checklist->checkup_symptoms, ['class' => 'form-control', 'required' => '', 'maxlength' => '255']) }}
 
 							  </div>
 						    </div>
@@ -181,8 +179,8 @@
 						    <div class="row">
 							  <div class="form-group col-xs-5 col-lg-7">
 
-							    {{ Form::label('prescription', "Prescription") }}
-							    {{ Form::text('prescription', $checklist->prescription, ['class' => 'form-control', 'required' => '', 'maxlength' => '255']) }}
+							    {{ Form::label('checkup_prescription', "Prescription") }}
+							    {{ Form::text('checkup_prescription', $checklist->checkup_prescription, ['class' => 'form-control', 'required' => '', 'maxlength' => '255']) }}
 
 							  </div>
 						    </div>
@@ -190,8 +188,8 @@
 						    <div class="row">
 							  <div class="form-group col-xs-5 col-lg-7">
 
-							    {{ Form::label('description', "Description") }}
-							    {{ Form::text('description', $checklist->description, ['class' => 'form-control', 'required' => '', 'maxlength' => '255']) }}
+							    {{ Form::label('checkup_description', "Description") }}
+							    {{ Form::text('checkup_description', $checklist->checkup_description, ['class' => 'form-control', 'required' => '', 'maxlength' => '255']) }}
 
 							  </div>
 						    </div>
@@ -201,7 +199,7 @@
 
 							    {{ Form::label('patient_weight', "patient_weight") }}
 							    {{ Form::number('patient_weight', $checklist->patient_weight, ['class' => 'form-control', 'required' => '', 'maxlength' => '255']) }}
-							    {{ Form::hidden('p_id', $checklist->p_id) }}
+							    {{ Form::hidden('patient_id', $checklist->patient_id) }}
 
 							  </div>
 						    </div>

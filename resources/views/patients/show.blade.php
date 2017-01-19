@@ -1,4 +1,5 @@
 @extends('main')
+@section('title', 'Patient Record')
 
 @section('content')
 
@@ -28,7 +29,7 @@
               <td>{{$patients->patient_fname}}</td>
               <td>{{$patients->patient_weight}}</td>
               <td>{{$patients->patient_height}}</td>
-              <td>{{$patients->patient_lname}}</td>
+              <td>{{Carbon::createFromFormat('Y-m-d', $patients->patient_bdate)->diff(Carbon::now())->format('%y year(s), %m month(s) and %d day(s)')}}</td>
               <td>{{$patients->patient_sex}}</td>
               <td>{{$patients->patient_mother_name}}</td>
               <td>{{$patients->patient_address}}</td>

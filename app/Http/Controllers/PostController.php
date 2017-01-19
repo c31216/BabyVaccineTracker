@@ -13,6 +13,7 @@ use Session;
 use PDF;
 use Validator;
 use DB;
+use Carbon\Carbon;
 
 class PostController extends Controller
 {
@@ -33,6 +34,7 @@ class PostController extends Controller
     {
         $patient = Patient::orderBy('PatientID', 'desc')->paginate(10);
         $vaccine = Vaccine::all();
+
         return view('patients.index')->withPatients($patient)->withVaccines($vaccine);
 
     }
@@ -63,40 +65,47 @@ class PostController extends Controller
                 'patient_height' => 'required|max:255',
                 'patient_age' => 'required|max:255',
                 'patient_sex' => 'required|min:1',
-                'patient_mother_name' => 'required|max:255',
                 'patient_address' => 'required|max:255',
                 'patient_uname' => 'required|max:255|Alpha_num',
-                'patient_pass' => 'required|max:255|Alpha_num'
+                'patient_headcircumference' => 'required|max:255',
         ]);
         
-     
+        $output = "";
 
-        // if ($validator->fails()) {
+        if ($validator->fails()) {
 
-        //   return response()->json(['input' => $validator->errors()->keys()]);
+            foreach ($validator->errors()->all('<li>:message</li>') as $error_message) {
+                $output .= $error_message;
+            }
 
-        // }else{
-        //     echo 'success';
-        // }
+          return response()->json(['input' => $output]);
+
+
+        }else{
+            $patient = new Patient;
+            $patient->patient_fname = $request->patient_fname;
+            $patient->patient_lname = $request->patient_lname;
+            $patient->patient_bdate = $request->patient_bdate;
+            $patient->patient_weight = $request->patient_weight;
+            $patient->patient_height = $request->patient_height;
+            $patient->patient_headcircumference = $request->patient_headcircumference;
+            $patient->patient_age = $request->patient_age;
+            $patient->patient_sex = $request->patient_sex;
+            $patient->patient_mother_name = $request->patient_mother_name;
+            $patient->patient_guardian_name = $request->patient_guardian_name;
+            $patient->patient_father_name = $request->patient_father_name;
+            $patient->patient_address = $request->patient_address;
+            $patient->patient_uname = $request->patient_uname;
+            $patient->patient_pass = $request->patient_pass;
+            $patient->patient_registration_date = $request->patient_registration_date;
+
+            $patient->save();
+
+            return response()->json(['patient_id' => $patient->PatientID]);
+        }
        
       
-        $patient = new Patient;
-        $patient->patient_fname = $request->patient_fname;
-        $patient->patient_lname = $request->patient_lname;
-        $patient->patient_bdate = $request->patient_bdate;
-        $patient->patient_weight = $request->patient_weight;
-        $patient->patient_height = $request->patient_height;
-        $patient->patient_age = $request->patient_age;
-        $patient->patient_sex = $request->patient_sex;
-        $patient->patient_mother_name = $request->patient_mother_name;
-        $patient->patient_address = $request->patient_address;
-        $patient->patient_uname = $request->patient_uname;
-        $patient->patient_pass = $request->patient_pass;
-        $patient->patient_registration_date = $request->patient_registration_date;
-
-        $patient->save();
-
-        echo $patient->PatientID;
+        
     }
 
     /**
@@ -109,7 +118,7 @@ class PostController extends Controller
     {
 
         $patient = Patient::find($id);
-        $immunizationstatus = Immunization::where('p_id', '=' , $id)->orderBy('id','desc')->get();
+        $immunizationstatus = Immunization::where('patient_id', '=' , $id)->orderBy('ImmunizationID','desc')->get();
 
         $vaccination_date = [];
         $values = [];
@@ -133,11 +142,6 @@ class PostController extends Controller
          foreach (array_merge($values,$null_values) as $merge ) {
              $vaccination_date[] = $merge;
          }
-
-         
-
-         
-
 
         return view('patients.show')->withPatients($patient)->withVaccinationdates($vaccination_date)->withImmunizationstatuses($immunizationstatus);
     }
@@ -250,7 +254,7 @@ class PostController extends Controller
     public function pdf($id){
         $patient = Patient::where('PatientID', '=', $id)->first();
 
-        $immunizationstatus = Immunization::where('p_id', '=' , $id)->orderBy('id','desc')->get();
+        $immunizationstatus = Immunization::where('patient_id', '=' , $id)->orderBy('patient_id','desc')->get();
 
         $vaccination_date = [];
         $values = [];
@@ -279,7 +283,7 @@ class PostController extends Controller
         $pdf = PDF::loadView('pdf/pdf',['patients' => $patient,'vaccinationdates' => $vaccination_date]);
         $pdf->setPaper('A4', 'landscape');
 
-        return $pdf->stream('invoice.pdf');
+        return $pdf->stream('ImmunizationRecord.pdf');
 
     }
 

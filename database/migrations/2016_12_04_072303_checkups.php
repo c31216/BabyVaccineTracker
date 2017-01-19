@@ -14,12 +14,12 @@ class Checkups extends Migration
     public function up()
     {
         Schema::create('checkups', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('symptoms');
-            $table->string('prescription');
-            $table->string('description');
-            $table->string('doctor');
-            $table->integer('p_id');
+            $table->increments('CheckupID');
+            $table->string('checkup_symptoms');
+            $table->string('checkup_prescription');
+            $table->string('checkup_description');
+            $table->string('doctor_name');
+            $table->integer('patient_id');
             $table->date('checkup_date');
             $table->integer('patient_weight');
             $table->integer('patient_height');

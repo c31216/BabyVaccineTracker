@@ -14,18 +14,18 @@ class VaccinesTableSeeder extends Seeder
         DB::table('vaccines')->delete();
 
         $vaccines = [
-        				['name' => 'BCG','part' => '1'],
-        				['name' => 'Hepa B1 w/in 24 hours ','part' => '1'],
-        				['name' => 'Hepa B1 More than 24 hours','part' => '1'],
-        				['name' => 'Pentavalent 1','part' => '1'],
-        				['name' => 'Pentavalent 2','part' => '1'],
-        				['name' => 'Pentavalent 3','part' => '1'],
-        				['name' => 'Pentavalent 4','part' => '1'],
-        				['name' => 'OPV 1','part' => '1'],
-        				['name' => 'OPV 2','part' => '1'],
-        				['name' => 'OPV 3','part' => '1'],
-        				['name' => 'MVC 1','part' => '1'],
-        				['name' => 'MVC 2','part' => '1'],
+        				['vaccine_name' => 'BCG','vaccine_part' => '1'],
+        				['vaccine_name' => 'Hepa B1 w/in 24 hours ','vaccine_part' => '1'],
+        				['vaccine_name' => 'Hepa B1 More than 24 hours','vaccine_part' => '1'],
+        				['vaccine_name' => 'Pentavalent 1','vaccine_part' => '1'],
+        				['vaccine_name' => 'Pentavalent 2','vaccine_part' => '1'],
+        				['vaccine_name' => 'Pentavalent 3','vaccine_part' => '1'],
+        				['vaccine_name' => 'Pentavalent 4','vaccine_part' => '1'],
+        				['vaccine_name' => 'OPV 1','vaccine_part' => '1'],
+        				['vaccine_name' => 'OPV 2','vaccine_part' => '1'],
+        				['vaccine_name' => 'OPV 3','vaccine_part' => '1'],
+        				['vaccine_name' => 'MVC 1','vaccine_part' => '1'],
+        				['vaccine_name' => 'MVC 2','vaccine_part' => '1'],
 
         			];
 

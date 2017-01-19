@@ -8,6 +8,6 @@ class Immunization extends Model
 {
    public function vaccines()
   {
-    return $this->belongsTo('App\Vaccine','id');
+    return $this->belongsTo('App\Vaccine','VaccineID');
   }
 }

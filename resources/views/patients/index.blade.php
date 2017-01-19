@@ -7,12 +7,23 @@
 
 @endsection
 
-@section('content')
+@section('title', 'Patient Lists')
 
+@section('content')
+    
+    <style>
+      #validation{
+        display: none;
+      }
+    </style>
+    <div class="alert alert-danger" id="validation" role="alert">
+      <strong></strong>
+    </div>
+
+    <br>
     {{ Form::label('search', "Search: ") }}
     {{ Form:: text('search', null, ['id'=>'search'])}}
-    <span id="found"></span>
-   
+
     <hr>
         <h3>Records <a href="#" id="add-record"><img class="add-record-button" src="/img/add_record.png"></a></h3>
         <p>Sort by:</p>
@@ -32,11 +43,14 @@
             <th>Date of birth</th>
             <th>Last name</th>
             <th>First name</th> 
-            <th>Weight</th>
-            <th>Height</th>
+            <th>Weight(kg)</th>
+            <th>Height(cm)</th>
+            <th>Head Circumf.(cm)</th>
             <th>Age</th>
             <th>Sex</th>
             <th>Name of mother</th>
+            <th>Name of father</th>
+            <th>Name of guardian</th>
             <th>Address</th>             
 
           </tr>
@@ -50,11 +64,14 @@
               <td class="date patient_bdate" id="{{$patient->PatientID}}">{{$patient->patient_bdate}}</td>
               <td class="edit patient_lname" id="{{$patient->PatientID}}">{{$patient->patient_lname}}</td>
               <td class="edit patient_fname" id="{{$patient->PatientID}}">{{$patient->patient_fname}}</td>
-              <td class="edit patient_weight" id="{{$patient->PatientID}}">{{$patient->patient_weight}}</td>
-              <td class="edit patient_height" id="{{$patient->PatientID}}">{{$patient->patient_height}}</td>
-              <td class="edit patient_age" id="{{$patient->PatientID}}">{{$patient->patient_age}}</td>
-              <td class="patient_sex" id="{{$patient->PatientID}}">{{$patient->patient_sex}}</td>
+              <td class="number patient_weight" id="{{$patient->PatientID}}">{{$patient->patient_weight}}</td>
+              <td class="number patient_height" id="{{$patient->PatientID}}">{{$patient->patient_height}}</td>
+              <td class="number patient_headcircumference" id="{{$patient->PatientID}}">{{$patient->patient_headcircumference}}</td>
+              <td class="patient_age" id="{{$patient->PatientID}}">{{Carbon::createFromFormat('Y-m-d', $patient->patient_bdate)->diff(Carbon::now())->format('%y year(s), %m month(s) and %d day(s)')}}</td>
+              <td class="select patient_sex" id="{{$patient->PatientID}}">{{$patient->patient_sex}}</td>
               <td class="edit patient_mother_name" id="{{$patient->PatientID}}">{{$patient->patient_mother_name}}</td>
+              <td class="edit patient_father_name" id="{{$patient->PatientID}}">{{$patient->patient_father_name}}</td>
+              <td class="edit patient_guardian_name" id="{{$patient->PatientID}}">{{$patient->patient_guardian_name}}</td>
               <td class="edit patient_address" id="{{$patient->PatientID}}">{{$patient->patient_address}}</td>
               {{-- <td><input type="hidden" name="_method" value="PUT" /></td> --}}
 

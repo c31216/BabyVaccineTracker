@@ -11,10 +11,8 @@
 |
 */
 
+use Carbon\Carbon;
 use App\Patient;
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
 
 Auth::routes();
 Route::resource('posts', 'PostController');
@@ -45,10 +43,6 @@ Route::post('usercheck', [
 Route::post('userlogout', [
     'as' => 'user.logout', 'uses' => 'UserAuth\UserLoginController@logout'
 ]);
-Route::get('/s/{id}/{col}', function(Request $request){
-	 DB::update("UPDATE patients SET " . $request['col'] . " = ? WHERE PatientID = ?", [$request->value, $request->id]);
-      
-});
 
 
 Route::get('home', [
@@ -60,4 +54,8 @@ Route::get('/', function(){
 });
 
 Route::resource('add', 'MedicalPersonnelController');
+Route::resource('report', 'ReportController');
 
+Route::post('reportpdf', [
+    'as' => 'report.pdf', 'uses' => 'ReportController@pdf'
+]);

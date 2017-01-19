@@ -43,28 +43,28 @@ class ImmunizeController extends Controller
     public function store(Request $request)
     {
          $this->validate($request, [
-                'p_id' => 'required|max:255|numeric',
+                'patient_id' => 'required|max:255|numeric',
                 'vaccination_received' => 'required|max:255|date',
-                'midwife' => 'required|max:255',
+                'midwife_name' => 'required|max:255',
                 'vaccine_id' => 'required|numeric|same:expected_vaccine',
-                'description' => 'required|max:255',
+                'immunization_description' => 'required|max:255',
                 'patient_weight' => 'required|max:255|numeric',
                 'patient_height' => 'required|max:255|numeric',
         ]);
         $immunizationstatus = new Immunization;
         
-        $immunizationstatus->p_id = $request->p_id;
+        $immunizationstatus->patient_id = $request->patient_id;
         $immunizationstatus->vaccination_received = $request->vaccination_received;
-        $immunizationstatus->midwife = $request->midwife;
+        $immunizationstatus->midwife_name = $request->midwife_name;
         $immunizationstatus->vaccine_id = $request->vaccine_id;
-        $immunizationstatus->description = $request->description;
+        $immunizationstatus->immunization_description = $request->immunization_description;
         $immunizationstatus->patient_weight = $request->patient_weight;
         $immunizationstatus->patient_height = $request->patient_height;
 
         $immunizationstatus->save();
 
         Session::flash('success' , 'Successfully Added.');
-        return redirect()->route('immunization.show',$immunizationstatus->p_id);
+        return redirect()->route('immunization.show',$immunizationstatus->patient_id);
     }
 
     /**
@@ -77,11 +77,11 @@ class ImmunizeController extends Controller
     {
         $patient = Patient::where('PatientID', '=', $id)->first();
 
-        $medicalpersonnel = MedicalPersonnel::where('role', 'midwife')->get();
+        $medicalpersonnel = MedicalPersonnel::where('medicalpersonnel_role', 'midwife')->get();
 
-        $immunizationstatus = Immunization::join('vaccines', 'vaccines.id', '=', 'immunizations.vaccine_id')
-            ->select('immunizations.*', 'vaccines.name')
-            ->where('p_id','=', $id)
+        $immunizationstatus = Immunization::join('vaccines', 'vaccines.VaccineID', '=', 'immunizations.vaccine_id')
+            ->select('immunizations.*', 'vaccines.vaccine_name')
+            ->where('patient_id','=', $id)
             ->get();
 
         $TookVaccine = Vaccine::whereDoesntHave('users', function($q) use($id) {
@@ -89,7 +89,7 @@ class ImmunizeController extends Controller
         })->get();
 
         if ($TookVaccine->isEmpty()) {
-            echo 'sdfsd';
+            echo 's';
          }
 
         $vaccine = Vaccine::all();
@@ -120,11 +120,11 @@ class ImmunizeController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'p_id' => 'required|max:255|numeric',
+            'patient_id' => 'required|max:255|numeric',
             'vaccination_received' => 'required|max:255|date',
-            'midwife' => 'required|max:255',
+            'midwife_name' => 'required|max:255',
             'vaccine_id' => 'required|numeric',
-            'description' => 'required|max:255',
+            'immunization_description' => 'required|max:255',
             'patient_weight' => 'required|max:255|numeric',
             'patient_height' => 'required|max:255|numeric',
         ]);
@@ -132,9 +132,9 @@ class ImmunizeController extends Controller
         $immunizationstatus = Immunization::find($id);
 
         $immunizationstatus->vaccination_received = $request->vaccination_received;
-        $immunizationstatus->midwife = $request->midwife;
+        $immunizationstatus->midwife_name = $request->midwife_name;
         $immunizationstatus->vaccine_id = $request->vaccine_id;
-        $immunizationstatus->description = $request->description;
+        $immunizationstatus->immunization_description = $request->immunization_description;
         $immunizationstatus->patient_weight = $request->patient_weight;
         $immunizationstatus->patient_height = $request->patient_height;
 
@@ -142,7 +142,7 @@ class ImmunizeController extends Controller
         $immunizationstatus->save();
 
         Session::flash('success' , 'Changes Successfully saved.');
-        return redirect()->route('immunization.show',$immunizationstatus->p_id);
+        return redirect()->route('immunization.show',$immunizationstatus->patient_id);
     }
 
     /**

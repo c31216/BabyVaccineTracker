@@ -14,11 +14,11 @@ class CreateImmunizationsTable extends Migration
     public function up()
     {
         Schema::create('immunizations', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('ImmunizationID');
             $table->integer('vaccine_id');
-            $table->string('description');
-            $table->string('midwife');
-            $table->integer('p_id');
+            $table->string('immunization_description');
+            $table->string('midwife_name');
+            $table->integer('patient_id');
             $table->date('vaccination_received');
             $table->integer('patient_weight');
             $table->integer('patient_height');

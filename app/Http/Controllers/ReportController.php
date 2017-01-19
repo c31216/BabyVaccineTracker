@@ -3,14 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
-
-use App\MedicalPersonnel;
-
+use App\Patient;
+use PDF;
 use Session;
 
-class MedicalPersonnelController extends Controller
+class ReportController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,7 +16,7 @@ class MedicalPersonnelController extends Controller
      */
     public function index()
     {
-        return view('midwife_doctor.create');
+        return view('reports.index');
     }
 
     /**
@@ -33,27 +30,14 @@ class MedicalPersonnelController extends Controller
     }
 
     /**
-     * Store a newly created resource in storpatient_age.
+     * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-                'medicalpersonnel_role' => 'required|max:255',
-                'medicalpersonnel_name' => 'required|max:255',
-        ]);
-
-        $MedicalPersonnel = new MedicalPersonnel;
-        $MedicalPersonnel->medicalpersonnel_role = $request->medicalpersonnel_role;
-        $MedicalPersonnel->medicalpersonnel_name = $request->medicalpersonnel_name;
-
-        Session::flash('success' , 'Submitted Successfully');
-
-        $MedicalPersonnel->save();
-
-        return redirect()->route('add.index');
+   
     }
 
     /**
@@ -79,7 +63,7 @@ class MedicalPersonnelController extends Controller
     }
 
     /**
-     * Update the specified resource in storpatient_age.
+     * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -91,7 +75,7 @@ class MedicalPersonnelController extends Controller
     }
 
     /**
-     * Remove the specified resource from storpatient_age.
+     * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -99,5 +83,21 @@ class MedicalPersonnelController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function pdf(Request $request){
+     $patient = Patient::where($request->filter , '=' , $request->input)->get();
+
+     if ($patient->isEmpty()) {
+         Session::flash('Failed: ' , 'Record Not Found');
+         return redirect()->route('report.index');
+     }else{
+        $pdf = PDF::loadView('pdf.report',['patients' => $patient]);
+        $pdf->setPaper('A4', 'landscape');
+        return $pdf->stream('ImmunizationRecord.pdf');
+     }
+    
+
+
     }
 }
