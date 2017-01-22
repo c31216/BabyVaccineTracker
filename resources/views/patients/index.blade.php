@@ -16,7 +16,7 @@
         display: none;
       }
     </style>
-    <div class="alert alert-danger" id="validation" role="alert">
+    <div class="alert" id="validation" role="alert">
       <strong></strong>
     </div>
 
@@ -51,7 +51,8 @@
             <th>Name of mother</th>
             <th>Name of father</th>
             <th>Name of guardian</th>
-            <th>Address</th>             
+            <th>Address</th>
+            
 
           </tr>
         </thead>

@@ -62,7 +62,7 @@ class DoctorController extends Controller
     }
 
     /**
-     * Update the specified resource in storpatient_age.
+     * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id

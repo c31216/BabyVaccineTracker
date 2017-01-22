@@ -26,9 +26,10 @@ class UserLoginController extends Controller
     }
 
     public function index(){
+    
     	$PatientID = Session::get('PatientID');
     	$patient = Patient::find($PatientID);
-        $immunizationstatus = Immunization::where('patient_id', '=' , $PatientID)->orderBy('id','desc')->get();
+        $immunizationstatus = Immunization::where('patient_id', '=' , $PatientID)->orderBy('ImmunizationID','desc')->get();
 
         $vaccination_date = [];
         $values = [];
@@ -51,7 +52,7 @@ class UserLoginController extends Controller
         }
          foreach (array_merge($values,$null_values) as $merge ) {
              $vaccination_date[] = $merge;
-         }
+        }
 
     	return view('userside.index')->withPatient($patient)->withVaccinationdates($vaccination_date)->withImmunizationstatuses($immunizationstatus);
     }
@@ -59,8 +60,8 @@ class UserLoginController extends Controller
     public function check(Request $request){
 
     	$validator = Validator::make($request->all(), [
-            'patient_uname' => 'required',
-            'patient_pass' => 'required',
+            'patient_uname' => 'required|max:255',
+            'patient_pass' => 'required|max:255',
         ]);
 
     	$patient = Patient::where('patient_uname', '=', $request->patient_uname)->

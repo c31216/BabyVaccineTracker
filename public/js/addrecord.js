@@ -27,8 +27,7 @@ $(document).ready(function(){
 								'<td><input type="text" name="patient_father_name" class="col-xs-12"></input></td>'+
 								'<td><input type="text" name="patient_guardian_name" class="col-xs-12"></input></td>'+
 								'<td><input type="text" name="patient_address" class="col-xs-12"></input></td>'+
-								'<td id="hidden"><input type="text" name="patient_uname" class="col-xs-12"></input></td>'+
-								'<td id="hidden"><input type="text" name="patient_pass" class="col-xs-12"></input></td>'+ csrf+
+								'<td id="hidden"><input type="text" name="patient_uname" class="col-xs-12"></input></td>'+csrf+
 							'</tr>');
 		event.stopPropagation();
 		$("tr#active td input[name=patient_lname]").focus();
@@ -36,21 +35,19 @@ $(document).ready(function(){
 	  	$('[data-toggle="datepicker"]').datepicker({
 	  		format: 'yyyy-mm-dd'
 	  	});
-
-	  	$("#th").append('<th id="temporary">Username</th><th id="temporary">Password</th>');
-
+	  	$("#th").append('<th id="temporary">Username</th>');
 	  	$('#active input').keypress(function(event){
 
 		  if(event.keyCode == 13){
 
-		  	var valid_lic_num = /^(?=.{6,255}$)[a-zA-Z0-9]+(?:_[a-zA-Z0-9]+)*$/;
-		    var raw_patient_uname =  $("input[name=patient_uname]").val();
-		    var raw_patient_pass =  $("input[name=patient_pass]").val();
+		 //  	var valid_lic_num = /^(?=.{6,255}$)[a-zA-Z0-9]+(?:_[a-zA-Z0-9]+)*$/;
+		 //    var raw_patient_uname =  $("input[name=patient_uname]").val();
+		 //    var raw_patient_pass =  $("input[name=patient_pass]").val();
 		 	
 		   
 
 		    var patient_uname = $("input[name=patient_uname]").val();
-			var patient_pass = $("input[name=patient_pass]").val();
+			// var patient_pass = $("input[name=patient_pass]").val();
 
 			
 
@@ -76,16 +73,11 @@ $(document).ready(function(){
 			$.ajax({
 	          type: 'POST',
 	          url: add,
-	          data: {patient_father_name:patient_father_name,patient_guardian_name:patient_guardian_name,patient_headcircumference:patient_headcircumference,patient_uname:patient_uname,patient_pass:patient_pass,patient_registration_date:patient_registration_date,patient_bdate:patient_bdate,patient_lname:patient_lname,patient_fname:patient_fname,patient_weight:patient_weight,patient_height:patient_height,patient_age:patient_age,patient_sex:patient_sex,patient_mother_name:patient_mother_name,patient_address:patient_address,_token:token},
+	          data: {patient_uname:patient_uname,patient_father_name:patient_father_name,patient_guardian_name:patient_guardian_name,patient_headcircumference:patient_headcircumference,patient_registration_date:patient_registration_date,patient_bdate:patient_bdate,patient_lname:patient_lname,patient_fname:patient_fname,patient_weight:patient_weight,patient_height:patient_height,patient_age:patient_age,patient_sex:patient_sex,patient_mother_name:patient_mother_name,patient_address:patient_address,_token:token},
 	          success: function(data){
-
-	        
-
 	         	if (data.patient_id) {
-		          	$("input[name=patient_pass]").remove();// remove the value of input upon submisiso
-		          	$("input[name=patient_uname]").remove();// remove the value of input upon submisiso
 
-
+	         		$("input[name=patient_uname]").remove();
 		          	//Add an edit class to all input elements except the specified input attribute name
 		          	$( "input[name!='patient_registration_date'][name!='patient_bdate']").closest('td').addClass('edit');
 
@@ -103,6 +95,11 @@ $(document).ready(function(){
 		          	});// append the select element value to the td element
 
 		          	$("tr#active").addClass('success');// add class success to table row
+		          	// $("#validation").removeClass('alert-danger');
+		          	// $("#validation").show().addClass('alert-success');
+
+					// $("#validation strong").html("User's Username and Password is " + data.patient_acct + "<br>");
+
 		          	$("tr#active td input").remove();// remove the element input upon submisison
 		          	$("tr#active td select").remove();// remove the element select upon submisison
 		          	$( "tr#active #hidden" ).each(function() {
@@ -111,8 +108,6 @@ $(document).ready(function(){
 					$( "tr #hidden" ).each(function() {
 					  $( this ).remove();
 					});
-					$("#temporary").remove();
-					$("#temporary").remove();
 
 		          	
 		          	$("tr#active").append('<td><a href="posts/'+data.patient_id+'"><p>View Profile</p></a></td>'+
@@ -124,20 +119,21 @@ $(document).ready(function(){
 		          	addrecord.show();
 		          	clicked_addrecord = false;
 	          	}else{
-
-	          		$("#validation").show();
+	          		
+	          		$("#validation").removeClass('alert-success');
+	          		$("#validation").show().addClass('alert-danger');
 	          		$("#validation strong").html('Failed: ' + data.input + '<br>');
 	          		$('tr td input').filter(function() {
 					    return !this.value;
 					}).attr("placeholder", "Required").addClass("required");
 					
-				 	if (!valid_lic_num.test(raw_patient_uname)) {  
-						$("input[name=patient_uname]").addClass("required");
-			    	} 
+				 	// if (!valid_lic_num.test(raw_patient_uname)) {  
+						// $("input[name=patient_uname]").addClass("required");
+			   //  	} 
 
-			    	if (!valid_lic_num.test(raw_patient_pass)) {  
-						$("input[name=patient_pass]").addClass("required");
-			    	}
+			   //  	if (!valid_lic_num.test(raw_patient_pass)) {  
+						// $("input[name=patient_pass]").addClass("required");
+			   //  	}
 			    }
 	          }
 	           
@@ -155,10 +151,8 @@ $(document).ready(function(){
 			if ( e.target.nodeName=="INPUT" || e.target.nodeName=="SELECT") {
 			    return;
 			}
+			$("#temporary").remove();
 			$("tr#active").remove();
-
-			$("#temporary").remove();
-			$("#temporary").remove();
 			addrecord.show();
        	}
 	});

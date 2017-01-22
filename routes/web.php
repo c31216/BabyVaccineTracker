@@ -59,3 +59,11 @@ Route::resource('report', 'ReportController');
 Route::post('reportpdf', [
     'as' => 'report.pdf', 'uses' => 'ReportController@pdf'
 ]);
+
+Route::get('usersettings/{id}', [
+    'as' => 'user.settings', 'uses' => 'UserSettingsController@edit'
+]);
+
+Route::put('usersettingsupdate/{id}', [
+    'as' => 'usersettings.update', 'uses' => 'UserSettingsController@update'
+]);

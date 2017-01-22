@@ -1,9 +1,5 @@
 @include('partials._head')
 
-<a href="{{ route('posts.pdf', $patient->PatientID) }}" target="_blank" >
-  <p>Download PDF</p>
-</a>
-
 <nav class="navbar navbar-default">
     <div class="container-fluid custom-container">
       <div class="navbar-header">
@@ -25,8 +21,31 @@
               </div>
               <div class="col-xs-8">
                 <p class="title"><span>Baby Vaccine Tracker</span><br>your baby's health companion</p>
-          </div>
+              </div>
             </li>
+
+            <li>
+              <a href="{{ route('user.index') }}">
+                <div class="row nav-icon">
+                  <img src="/img/document-icon.png">
+                </div>
+                <div class="row">
+                  Personal Record
+                </div>
+              </a>
+            </li>
+
+            <li>
+              <a href="{{ route('user.settings', Session::get('PatientID')) }}">
+                <div class="row nav-icon">
+                  <img src="/img/document-icon.png">
+                </div>
+                <div class="row">
+                  Settings
+                </div>
+              </a>
+            </li>
+
         </ul>
 
         <div class="col-md-3 active-user">
@@ -51,6 +70,9 @@
 <div class="container">
   <div class="table-responsive">
     <table class="table table-bordered">
+      <a href="{{ route('posts.pdf', $patient->PatientID) }}" target="_blank" >
+        <p>Download PDF</p>
+      </a>
       <h3>Basic info</h3>
       <thead>
         <tr>
