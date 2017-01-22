@@ -64,7 +64,7 @@ class PostController extends Controller
                 'patient_weight' => 'required|max:255|integer',
                 'patient_height' => 'required|max:255|integer',
                 'patient_age' => 'required|max:255|integer',
-                'patient_sex' => 'required|min:1',
+                'patient_sex' => 'required|min:1|in:F,M,',
                 'patient_address' => 'required|max:255',
                 'patient_headcircumference' => 'required|max:255|integer',
         ]);
@@ -132,31 +132,12 @@ class PostController extends Controller
 
         $patient = Patient::find($id);
         $immunizationstatus = Immunization::where('patient_id', '=' , $id)->orderBy('ImmunizationID','desc')->get();
+        $TookVaccine = Vaccine::whereDoesntHave('users', function($q) use($id) {
+         $q->where('patients.PatientID', $id);
+        })->get();
 
-        $vaccination_date = [];
-        $values = [];
-        $null_values = [];
-        $count = 0;
 
-        while ($count<12) {
-            if ($count >= sizeof($immunizationstatus)){
-                while ($count<12) {
-                    $null_values[] = 'Empty';
-                    $count++;
-                }
-                break;
-               
-            }else{
-                $anotherValue = $immunizationstatus[$count];
-            }
-            $values[] =  $anotherValue->vaccination_received;
-            $count++;
-        }
-         foreach (array_merge($values,$null_values) as $merge ) {
-             $vaccination_date[] = $merge;
-         }
-
-        return view('patients.show')->withPatients($patient)->withVaccinationdates($vaccination_date)->withImmunizationstatuses($immunizationstatus);
+        return view('patients.show')->withPatients($patient)->withImmunizationstatuses($immunizationstatus)->withTookvaccines($TookVaccine);
     }
 
     /**
@@ -178,7 +159,7 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         // $patient = Patient::find($id);
         // if ($request->slug == $patient->slug) {
@@ -269,6 +250,10 @@ class PostController extends Controller
 
         $immunizationstatus = Immunization::where('patient_id', '=' , $id)->orderBy('patient_id','desc')->get();
 
+        $TookVaccine = Vaccine::whereDoesntHave('users', function($q) use($id) {
+         $q->where('patients.PatientID', $id);
+        })->get();
+
         $vaccination_date = [];
         $values = [];
         $null_values = [];
@@ -293,10 +278,24 @@ class PostController extends Controller
          }
 
 
-        $pdf = PDF::loadView('pdf/pdf',['patients' => $patient,'vaccinationdates' => $vaccination_date]);
+        $pdf = PDF::loadView('pdf/pdf',['patients' => $patient,'vaccinationdates' => $vaccination_date, 'tookvaccines' => $TookVaccine]);
         $pdf->setPaper('A4', 'landscape');
 
         return @$pdf->stream('ImmunizationRecord.pdf');
+
+    }
+
+    public function update_hospital_type(Request $request){
+
+         $patient_id = $request['col'];
+
+        $immunizationstatuses = Immunization::where('patient_id', '=' , $patient_id)->first();
+ 
+        $immunizationstatuses->vaccination_received = $request->value;
+
+        $immunizationstatuses->save();
+        
+        echo $request->value;
 
     }
 

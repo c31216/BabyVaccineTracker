@@ -67,3 +67,7 @@ Route::get('usersettings/{id}', [
 Route::put('usersettingsupdate/{id}', [
     'as' => 'usersettings.update', 'uses' => 'UserSettingsController@update'
 ]);
+
+Route::put('updatehospitaltype', [
+    'as' => 'hospitaltype.update', 'uses' => 'PostController@update_hospital_type'
+]);

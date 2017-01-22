@@ -93,6 +93,9 @@ $(document).ready(function(){
 		          	$("tr#active td select").each(function(){
 		          		$(this).closest('td').append($(this).val()).addClass($(this).attr('name')).attr('id', data.patient_id);
 		          	});// append the select element value to the td element
+		          	
+		          	$("#temporary").remove();
+
 
 		          	$("tr#active").addClass('success');// add class success to table row
 		          	// $("#validation").removeClass('alert-danger');

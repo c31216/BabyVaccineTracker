@@ -1,4 +1,12 @@
 @extends('main')
+
+@section('stylesheets')
+
+  {!! Html::style('css/parsley.css') !!}
+  {!! Html::style('dist/datepicker.css') !!}
+
+@endsection
+
 @section('title', 'Patient Record')
 
 @section('content')
@@ -23,7 +31,7 @@
         </thead>
         <tbody>
             <tr class="active">
-              <td>{{$patients->created_at}}</td>
+              <td>{{$patients->patient_registration_date}}</td>
               <td>{{$patients->patient_bdate}}</td>
               <td>{{$patients->patient_lname}}</td>
               <td>{{$patients->patient_fname}}</td>
@@ -76,9 +84,16 @@
           <td>12-13-16</td>
           <td>12-13-16</td>
           <td>12-13-16</td>
-          @foreach($vaccinationdates as $vaccination_date)
-            <td>{{$vaccination_date}}</td>
-          @endforeach
+          @for($i = 0; $i < 12; $i++)
+
+            @if(isset($immunizationstatuses[$i]))
+              <td class="date {{$patients->PatientID}}">{{$immunizationstatuses[$i]['vaccination_received']}}
+              </td>
+            @else
+              <td class="date">Empty</td>
+            @endif
+            
+          @endfor
       </tbody>
       </table>
     </div><!-- Div.table-responsive-->
@@ -113,7 +128,13 @@
         </tr>
         <tbody>
           <tr class="active">
-            <td>12-13-16</td>
+            <td>
+            @if($tookvaccines->isEmpty())
+            {{$patients->patient_registration_date}}
+            @else
+            Empty
+            @endif
+            </td>
             <td>12-13-16</td>
             <td>12-13-16</td>
             <td>12-13-16</td>
@@ -180,9 +201,17 @@
 
      <script>
        var token = '{{ Session::token() }}';
+       var csrf = '{{ csrf_field() }}';
+       var edit_submit = '{{ route('hospitaltype.update') }}';
      </script>
+
 @endsection
 
 @section('scripts')
+  
+  {!! Html::script('js/inlineeditor.js') !!}
+  {!! Html::script('dist/datepicker.js') !!}
+  {!! Html::script('js/jquery.jeditable.datepicker.js') !!}
+  {!! Html::script('js/patient.show.inlineedit.js') !!}
 
 @endsection

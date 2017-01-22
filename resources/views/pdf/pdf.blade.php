@@ -18,7 +18,7 @@
         </thead>
         <tbody>
             <tr class="active">
-              <td>{{$patients->created_at}}</td>
+              <td>{{$patients->patient_registration_date}}</td>
               <td>{{$patients->patient_bdate}}</td>
               <td>{{$patients->patient_lname}}</td>
               <td>{{$patients->patient_fname}}</td>
@@ -83,7 +83,7 @@
       <table class="table table-bordered">
       <h3>TCL For Nutrition and EPI Program P2</h3>
         <tr>
-          <th rowspan="2">Date<br>Fully<br>Immunized<br>Child</th>
+          <th rowspan="2">P1 Date of<br>Completion</th>
           <th colspan="2">Rota Virus<br>Vaccine</th>
           <th colspan="4">Pneumococcal<br>Conjugate Vaccines (PCV)</th>
           <th colspan="6">Child Was Exclusively Breastfed</th>
@@ -109,7 +109,13 @@
         </tr>
         <tbody>
           <tr class="active">
-            <td>12-13-16</td>
+            <td>
+              @if($tookvaccines->isEmpty())
+                {{$patients->patient_registration_date}}
+              @else
+                Empty
+              @endif
+            </td>
             <td>12-13-16</td>
             <td>12-13-16</td>
             <td>12-13-16</td>

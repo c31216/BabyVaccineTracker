@@ -11,7 +11,7 @@ use App\Patient;
 use App\Vaccine;
 use Session;
 use App\MedicalPersonnel;
-
+use Carbon;
 class ImmunizeController extends Controller
 {
     /**
@@ -89,9 +89,15 @@ class ImmunizeController extends Controller
         })->get();
 
         if ($TookVaccine->isEmpty()) {
-            echo 's';
-         }
 
+            if (!$patient->p1_completion_date) {
+
+                $patient->p1_completion_date = Carbon::now()->toDateString();
+                $patient->save();
+
+            }
+         }
+         
         $vaccine = Vaccine::all();
         return view('immunization.show')->withPatients($patient)
         ->withImmunizationstatuses($immunizationstatus)

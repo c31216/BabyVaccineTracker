@@ -5,7 +5,26 @@ $(document).on('click', ".edit", function () {
    select : true,
    submitdata : function(value, settings) {
      return {_method: "PUT",_token:token,col:$(this).attr("class").split(' ')[1]};
-    }
+    },
+    onsubmit: function(settings, td){
+        $(this).validate({
+            debug: true,
+            rules: {
+                value: {
+                    required: true,
+                    lettersonly: true,
+                    minlength: 2,
+                }
+            },
+            messages: {
+                value: "Invalid Input"
+            },
+            errorClass: "warning",
+            submitHandler: function() { 
+            }
+        });
+        return ($(this).valid());
+    },
   });
 });
 
@@ -67,7 +86,25 @@ submit : function (settings, original) {
      select : true,
      submitdata : function(value, settings) {
        return {_method: "PUT",_token:token,col:$(this).attr("class").split(' ')[1]};
-   	},callback : function(value, settings) {
+   	},onsubmit: function(settings, td){
+                $(this).validate({
+                    debug: true,
+                    rules: {
+                        value: {
+                            required: true,
+                            lettersonly: true,
+                            minlength: 2,
+                        }
+                    },
+                    messages: {
+                        required: "Invalid Input"
+                    },
+                    errorClass: "warning",
+                    submitHandler: function() { 
+                    }
+                });
+                return ($(this).valid());
+            },callback : function(value, settings) {
          $(this).addClass('success');
      }
  });
@@ -80,12 +117,43 @@ $('.number').editable(edit_submit, {
      indicator : 'saving ...',
      select : true,
      type: 'number',
+     onsubmit: function(settings, td) {
+        var input = $(td).find('input');
+        $(this).validate({
+            rules: {
+                'nameofinput': {
+                    number: true
+                }
+            },
+            messages: {
+                'actionItemEntity.name': {
+                    number: 'Only numbers are allowed'
+                }
+            }
+        });
+
+        return ($(this).valid());
+    },
      submitdata : function(value, settings) {
        return {_method: "PUT",_token:token,col:$(this).attr("class").split(' ')[1]};
     },callback : function(value, settings) {
          $(this).addClass('success');
      }
  });
+
+
+
+
+$.validator.addMethod(
+        "regex",
+        function(value, element, regexp) {
+            var re = new RegExp(regexp);
+            return this.optional(element) || re.test(value);
+        },
+        "Please check your input."
+);
+
+
 
 $('.select').editable(edit_submit, {
      // type     : 'textarea',
@@ -98,9 +166,28 @@ $('.select').editable(edit_submit, {
     submit: 'Ok',
     submitdata : function(value, settings) {
        return {_method: "PUT",_token:token,col:$(this).attr("class").split(' ')[1]};
-    },callback : function(value, settings) {
+    },
+    callback : function(value, settings) {
          $(this).addClass('success');
-     }
+    },
+    onsubmit: function(settings, td){
+        $(this).validate({
+            debug: true,
+            rules: {
+                value: {
+                    required: true,
+                    regex: "[MF]+"
+                }
+            },
+            messages: {
+                value: "Invalid Input"
+            },
+            errorClass: "warning",
+            submitHandler: function() { 
+            }
+        });
+        return ($(this).valid());
+    }
  });
 
 
@@ -129,14 +216,33 @@ $('.date').editable(edit_submit, {
     data: function(value, settings) {
       return value;
     },
-     submitdata : function(value, settings) {
+    submitdata : function(value, settings) {
        return {_method: "PUT",_token:token,col:$(this).attr("class").split(' ')[1]};
-	   },callback : function(value, settings) {
-         $(this).addClass('success');
-    }
+	},
+    callback : function(value, settings) {
+        $(this).addClass('success');
+    },
+    onsubmit: function(settings, td){
+        $(this).validate({
+            debug: true,
+            rules: {
+                value: {
+                    required: true,
+                    date: true,
+                }
+            },
+            messages: {
+                date: "Invalid Format"
+            },
+            errorClass: "warning",
+            submitHandler: function() { 
+            }
+        });
+        return ($(this).valid());
+    },
  });
 
- $(document).on("keyup", "input", function(e){
+$(document).on("keyup", "input", function(e){
   if (e.keyCode === 10 || e.keyCode === 13){
     return false;
   } 

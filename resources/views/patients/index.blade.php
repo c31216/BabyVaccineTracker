@@ -124,6 +124,7 @@
 
 
   @section('scripts')
+  
     {!! Html::script('js/search.js') !!}
     {!! Html::script('js/addrecord.js') !!}
     {!! Html::script('js/inlineeditor.js') !!} 

@@ -17,7 +17,7 @@
 
 <div class="container">
 	<div class="row">
-
+{{'Current PHP version: ' . phpversion()}}
 		<div class="col-md-4">
 			<br>
 			<h4>Babies who has not yet taken: </h4>
