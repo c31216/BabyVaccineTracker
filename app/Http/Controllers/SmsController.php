@@ -149,5 +149,9 @@ class SmsController extends Controller
         $sendlink = "https://www.isms.com.my/isms_send.php?un=".urlencode($username)."&pwd=".urlencode($password)."&dstno=".$dstno."&msg=".urlencode($msg)."&type=".$type."&sendid=".$senderid; 
         fopen($sendlink, "r");
 
+        Session::flash('Success', 'Your Message Has Been Sent');
+        return redirect()->route('sms.index');
+
+
     }
 }

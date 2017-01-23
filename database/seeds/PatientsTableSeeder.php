@@ -64,7 +64,7 @@ class PatientsTableSeeder extends Seeder
                          'patient_guardian_name' => 'Random',
                          'patient_headcircumference' => '32.1',
         				 'patient_address' => 'San Fernando',
-                         'patient_phonenumber' => ' ',
+                         'patient_phonenumber' => '639158601772',
         				 'patient_bdate' => '2016-10-12',
         				 'patient_registration_date' => '2017-01-27'
         				],
@@ -136,7 +136,7 @@ class PatientsTableSeeder extends Seeder
                          'patient_guardian_name' => 'Random',
                          'patient_headcircumference' => '32.1',
         				 'patient_address' => 'Mexico',
-                         'patient_phonenumber' => ' ',
+                         'patient_phonenumber' => '639058922655',
         				 'patient_bdate' => '2016-06-27',
         				 'patient_registration_date' => '2017-01-27'
         				],
