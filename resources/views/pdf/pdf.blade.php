@@ -1150,16 +1150,6 @@ hr {
   border: 0;
   border-top: 1px solid #eee;
 }
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
-}
 .sr-only-focusable:active,
 .sr-only-focusable:focus {
   position: static;
@@ -2651,7 +2641,7 @@ input[type="search"] {
 .radio-inline input[type="radio"],
 .checkbox input[type="checkbox"],
 .checkbox-inline input[type="checkbox"] {
-  position: absolute;
+   
   margin-top: 4px \9;
   margin-left: -20px;
 }
@@ -2786,7 +2776,7 @@ select[multiple].input-lg {
   padding-right: 42.5px;
 }
 .form-control-feedback {
-  position: absolute;
+   
   top: 0;
   right: 0;
   z-index: 2;
@@ -3519,7 +3509,7 @@ tbody.collapse.in {
   outline: 0;
 }
 .dropdown-menu {
-  position: absolute;
+   
   top: 100%;
   left: 0;
   z-index: 1000;
@@ -3810,7 +3800,7 @@ tbody.collapse.in {
 [data-toggle="buttons"] > .btn-group > .btn input[type="radio"],
 [data-toggle="buttons"] > .btn input[type="checkbox"],
 [data-toggle="buttons"] > .btn-group > .btn input[type="checkbox"] {
-  position: absolute;
+   
   clip: rect(0, 0, 0, 0);
   pointer-events: none;
 }
@@ -5803,7 +5793,7 @@ button.list-group-item-danger.active:focus {
 .embed-responsive embed,
 .embed-responsive object,
 .embed-responsive video {
-  position: absolute;
+   
   top: 0;
   bottom: 0;
   left: 0;
@@ -5963,7 +5953,7 @@ button.close {
   margin-left: 0;
 }
 .modal-scrollbar-measure {
-  position: absolute;
+   
   top: -9999px;
   width: 50px;
   height: 50px;
@@ -5988,7 +5978,7 @@ button.close {
   }
 }
 .tooltip {
-  position: absolute;
+   
   z-index: 1070;
   display: block;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -6040,7 +6030,7 @@ button.close {
   border-radius: 4px;
 }
 .tooltip-arrow {
-  position: absolute;
+   
   width: 0;
   height: 0;
   border-color: transparent;
@@ -6103,7 +6093,7 @@ button.close {
   border-bottom-color: #000;
 }
 .popover {
-  position: absolute;
+   
   top: 0;
   left: 0;
   z-index: 1060;
@@ -6161,7 +6151,7 @@ button.close {
 }
 .popover > .arrow,
 .popover > .arrow:after {
-  position: absolute;
+   
   display: block;
   width: 0;
   height: 0;
@@ -6295,7 +6285,7 @@ button.close {
 }
 .carousel-inner > .next,
 .carousel-inner > .prev {
-  position: absolute;
+   
   top: 0;
   width: 100%;
 }
@@ -6316,7 +6306,7 @@ button.close {
   left: 100%;
 }
 .carousel-control {
-  position: absolute;
+   
   top: 0;
   bottom: 0;
   left: 0;
@@ -6359,7 +6349,7 @@ button.close {
 .carousel-control .icon-next,
 .carousel-control .glyphicon-chevron-left,
 .carousel-control .glyphicon-chevron-right {
-  position: absolute;
+   
   top: 50%;
   z-index: 5;
   display: inline-block;
@@ -6389,7 +6379,7 @@ button.close {
   content: '\203a';
 }
 .carousel-indicators {
-  position: absolute;
+   
   bottom: 10px;
   left: 50%;
   z-index: 15;
@@ -6418,7 +6408,7 @@ button.close {
   background-color: #fff;
 }
 .carousel-caption {
-  position: absolute;
+   
   right: 15%;
   bottom: 20px;
   left: 15%;
