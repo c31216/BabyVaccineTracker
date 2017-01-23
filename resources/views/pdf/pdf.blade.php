@@ -6762,7 +6762,7 @@ button.close {
         <h3>Basic info</h3>
         <thead>
           <tr>
-            <th>Date of registration</th>
+            <th>Date of <br>registration</th>
             <th>Date of birth</th>
             <th>Last name</th>
             <th>First name</th> 
