@@ -44,7 +44,8 @@ class PatientsTableSeeder extends Seeder
         				 'patient_mother_name' => 'Calma',
                          'patient_father_name' => 'Random',
                          'patient_guardian_name' => 'Random',
-                         'patient_headcircumference' => '32.1',
+                         'patient_headcircumference' => 
+                         'patient_phonenumber' => '','32.1',
         				 'patient_address' => 'Tarlac',
         				 'patient_bdate' => '2016-11-08',
         				 'patient_registration_date' => '2017-01-27'
@@ -63,6 +64,7 @@ class PatientsTableSeeder extends Seeder
                          'patient_guardian_name' => 'Random',
                          'patient_headcircumference' => '32.1',
         				 'patient_address' => 'San Fernando',
+                         'patient_phonenumber' => '',
         				 'patient_bdate' => '2016-10-12',
         				 'patient_registration_date' => '2017-01-27'
         				],
@@ -80,6 +82,7 @@ class PatientsTableSeeder extends Seeder
                          'patient_guardian_name' => 'Random',
                          'patient_headcircumference' => '32.1',
         				 'patient_address' => 'Manibuag Paralaya',
+                         'patient_phonenumber' => '',
         				 'patient_bdate' => '2016-10-13',
         				 'patient_registration_date' => '2017-01-27'
         				],
@@ -97,6 +100,7 @@ class PatientsTableSeeder extends Seeder
                          'patient_guardian_name' => 'Random',
                          'patient_headcircumference' => '32.1',
         				 'patient_address' => 'San Fernando',
+                         'patient_phonenumber' => '',
         				 'patient_bdate' => '2016-06-15',
         				 'patient_registration_date' => '2017-01-27'
         				],
@@ -114,6 +118,7 @@ class PatientsTableSeeder extends Seeder
                          'patient_guardian_name' => 'Random',
                          'patient_headcircumference' => '32.1',
         				 'patient_address' => 'San Fernando',
+                         'patient_phonenumber' => '',
         				 'patient_bdate' => '2016-06-22',
         				 'patient_registration_date' => '2017-01-27'
         				],
@@ -131,6 +136,7 @@ class PatientsTableSeeder extends Seeder
                          'patient_guardian_name' => 'Random',
                          'patient_headcircumference' => '32.1',
         				 'patient_address' => 'Mexico',
+                         'patient_phonenumber' => '',
         				 'patient_bdate' => '2016-06-27',
         				 'patient_registration_date' => '2017-01-27'
         				],
@@ -148,6 +154,7 @@ class PatientsTableSeeder extends Seeder
                          'patient_guardian_name' => 'Random',
                          'patient_headcircumference' => '32.1',
         				 'patient_address' => 'San Fernando',
+                         'patient_phonenumber' => '',
         				 'patient_bdate' => '2016-04-13',
         				 'patient_registration_date' => '2017-01-27'
         				],
@@ -165,6 +172,7 @@ class PatientsTableSeeder extends Seeder
                          'patient_guardian_name' => 'Random',
                          'patient_headcircumference' => '32.1',
         				 'patient_address' => 'Das Marinas',
+                         'patient_phonenumber' => '',
         				 'patient_bdate' => '2016-04-13',
         				 'patient_registration_date' => '2017-01-27'
         				],
