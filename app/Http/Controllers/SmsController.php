@@ -137,7 +137,7 @@ class SmsController extends Controller
     }   
 
     public function sendmessage(){
-        $username = 'otahchan';
+        $username = 'otachan';
         $password = 'Eldertale1';
         $dstno = '639973401805';
         $msg = 'hello';
