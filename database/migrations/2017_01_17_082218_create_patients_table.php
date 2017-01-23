@@ -33,6 +33,7 @@ class CreatePatientsTable extends Migration
             $table->date('patient_registration_date');
             $table->date('p1_completion_date')->nullable();
             $table->timestamps();
+            
         });
     }
 
