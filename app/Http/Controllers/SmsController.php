@@ -10,6 +10,7 @@ use App\Immunization;
 use App\Patient;
 use App\Vaccine;
 use App\User;
+use Session;
 
 class SmsController extends Controller
 {
@@ -127,7 +128,7 @@ class SmsController extends Controller
         $patients = Patient::whereIn('PatientID', $PatientID)->get();
 
         foreach ($patients as $patient) {
-            if ($patient->patient_phonenumber) {
+            if ($patient->patient_phonenumber != ' ') {
 
                  $output .= $patient->patient_phonenumber . ";";
             }
@@ -144,7 +145,7 @@ class SmsController extends Controller
         $username = 'cmeniano';
         $password = 'Eldertale1';
         $type = 1;
-        $senderid = 12345;
+        $senderid = 'MexicoRHC';
 
         $sendlink = "https://www.isms.com.my/isms_send.php?un=".urlencode($username)."&pwd=".urlencode($password)."&dstno=".$dstno."&msg=".urlencode($msg)."&type=".$type."&sendid=".$senderid; 
         fopen($sendlink, "r");
