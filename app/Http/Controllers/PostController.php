@@ -63,7 +63,6 @@ class PostController extends Controller
                 'patient_bdate' => 'required|max:255',
                 'patient_weight' => 'required|max:255|integer',
                 'patient_height' => 'required|max:255|integer',
-                'patient_age' => 'required|max:255|integer',
                 'patient_sex' => 'required|min:1|in:F,M,',
                 'patient_address' => 'required|max:255',
                 'patient_headcircumference' => 'required|max:255|integer',
@@ -101,7 +100,6 @@ class PostController extends Controller
             $patient->patient_weight = $request->patient_weight;
             $patient->patient_height = $request->patient_height;
             $patient->patient_headcircumference = $request->patient_headcircumference;
-            $patient->patient_age = $request->patient_age;
             $patient->patient_sex = $request->patient_sex;
             $patient->patient_mother_name = $request->patient_mother_name;
             $patient->patient_guardian_name = $request->patient_guardian_name;
@@ -162,36 +160,20 @@ class PostController extends Controller
      */
     public function update(Request $request)
     {
-        // $patient = Patient::find($id);
-        // if ($request->slug == $patient->slug) {
-        //     $this->validate($request, array(
-        //         'title' => 'required|max:255',
-        //         'body' => 'required'
-        //     ));
-        // } else {
-        //     $this->validate($request, array(
-        //         'title' => 'required|max:255',
-        //         'slug' => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
-        //         'body' => 'required'
-        //     ));
-        // }
-        // DB::update("UPDATE patients SET patient_fname = ? WHERE PatientID = ?", ['dfabvbda', '1']);
         
-         $patient = Patient::find($request->id);
+        
+        $patient = Patient::find($request->id);
         $b = $request['col'];
+        
+        if ($b == 'patient_age') {
+           return false;
+        }
         $patient->$b = $request->value;
 
         $patient->save();
 
         
         echo $request->value;
-      
-      
-      
-
-        // Session::flash('success' , 'Successfully saved.');
-
-        // return redirect()->route('patients.index');
     }
 
     /**
@@ -225,17 +207,19 @@ class PostController extends Controller
                                "<td class='date patient_bdate' id='".$patient->PatientID."'>".$patient->patient_bdate."</td>".
                                "<td class='edit patient_lname' id='".$patient->PatientID."'>".$patient->patient_lname."</td>".
                                "<td class='edit patient_fname' id='".$patient->PatientID."'>".$patient->patient_fname."</td>".
-                               "<td class='edit patient_weight' id='".$patient->PatientID."'>".$patient->patient_weight."</td>".
-                               "<td class='edit patient_height' id='".$patient->PatientID."'>".$patient->patient_height."</td>".
-                               "<td class='edit patient_age' id='".$patient->PatientID."'>".$patient->patient_age."</td>".
-                               "<td class='edit patient_sex' id='".$patient->PatientID."'>".$patient->patient_sex."</td>".
+                               "<td class='number patient_weight' id='".$patient->PatientID."'>".$patient->patient_weight."</td>".
+                               "<td class='number patient_height' id='".$patient->PatientID."'>".$patient->patient_height."</td>".
+                               "<td class='number patient_headcircumference id='".$patient->PatientID."'>".$patient->patient_headcircumference."</td>".
+                               "<td class='patient_age'>".Carbon::createFromFormat('Y-m-d', $patient->patient_bdate)->diff(Carbon::now())->format('%y year(s), %m month(s) and %d day(s)')."</td>".
+                               "<td class='select patient_sex' id='".$patient->PatientID."'>".$patient->patient_sex."</td>".
                                "<td class='edit patient_mother_name' id='".$patient->PatientID."'>".$patient->patient_mother_name."</td>".
+                               "<td class='edit patient_father_name' id='".$patient->PatientID."'>".$patient->patient_father_name."</td>".
+                               "<td class='edit patient_guardian_name' id='".$patient->PatientID."'>".$patient->patient_guardian_name."</td>".
                                "<td class='edit patient_address' id='".$patient->PatientID."'>".$patient->patient_address."</td>".
                                "<td><a href='posts/".$patient->PatientID."'><p>View Profile</p></a><td>".
                                "<td><a href='checkup/".$patient->PatientID."'><p>Check Up</p></a><td>".
                                "<td><a href='immunization/".$patient->PatientID."'><p>Immunization</p></a><td>".
                                "<td><a href='pdf/".$patient->PatientID."' target='_blank'><p>Download PDF</p></a><td></tr>";
-
                               
                 }
 

@@ -28,6 +28,7 @@ class CreatePatientsTable extends Migration
             $table->string('patient_guardian_name')->nullable();
             $table->decimal('patient_headcircumference');
             $table->string('patient_address');
+            $table->integer('patient_phonenumber')->nullable();
             $table->date('patient_bdate');
             $table->date('patient_registration_date');
             $table->date('p1_completion_date')->nullable();

@@ -28,6 +28,14 @@ Route::post('user_filter', [
     'as' => 'sms.filter', 'uses' => 'SmsController@filter'
 ]);
 
+Route::post('getpatientid', [
+    'as' => 'get.patientid', 'uses' => 'SmsController@getPatientID'
+]);
+
+Route::post('sendmessage', [
+    'as' => 'sms.send', 'uses' => 'SmsController@sendmessage'
+]);
+
 Route::get('pdf/{id}', [
     'as' => 'posts.pdf', 'uses' => 'PostController@pdf'
 ])->middleware('UserAndAdmin');

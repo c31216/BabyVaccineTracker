@@ -106,7 +106,7 @@ class SmsController extends Controller
         }else{    
 
             foreach ($users as $user) {
-            echo "<input type='checkbox' class='users' checked name='".$user->id."' value='".$user->id."'> " . $user->patient_lname . ", " . $user->patient_fname . " <br>";
+            echo "<input type='checkbox' class='users' checked name='".$user->PatientID."' value='".$user->PatientID."'> " . $user->patient_lname . ", " . $user->patient_fname . " <br>";
             }
         }
 
@@ -116,5 +116,27 @@ class SmsController extends Controller
         //    echo "<p>" . $patient->patient_lname . ", " . $patient->patient_fname . "</p>";
         // }
 
+    }
+
+    public function getPatientID(Request $request){
+        $PatientID = $request->patient_id;
+
+        $output = "";
+
+        $patients = Patient::whereIn('PatientID', $PatientID)->get();
+
+        foreach ($patients as $patient) {
+            if ($patient->patient_phonenumber) {
+
+                 $output .= $patient->patient_phonenumber . ", ";
+            }
+        
+
+        }
+        echo rtrim($output,', ');
+    }   
+
+    public function sendmessage(){
+        mail('c31216@gmail.com', '', 'sdfasdfa', 'From: $from\n');
     }
 }

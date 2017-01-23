@@ -17,7 +17,6 @@
 
 <div class="container">
 	<div class="row">
-{{'Current PHP version: ' . phpversion()}}
 		<div class="col-md-4">
 			<br>
 			<h4>Babies who has not yet taken: </h4>
@@ -33,7 +32,7 @@
 				<br>
 				
 				<div id="messagebox">
-					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Write a Message</button>
+					<button type="button" id="write_message" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Write a Message</button>
 
 					<div class="modal fade" id="myModal" role="dialog">
 					    <div class="modal-dialog modal-md">
@@ -43,7 +42,15 @@
 					          <h4 class="modal-title">Write a Message</h4>
 					        </div>
 					        <div class="modal-body">
-					          <p>To:</p>
+
+								<h4>Send To: </h4><span id="phone_numbers"></span><br><br>
+
+								{!! Form::open(['route' => 'sms.send','data-parsley-validate' => '']) !!}
+
+								{{ Form::textarea('notes') }}<br>
+								{{ Form::submit('Send Message', ['class' => 'btn btn-success']) }}
+								{!! Form::close() !!}
+
 					        </div>
 					        <div class="modal-footer">
 					          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -52,20 +59,16 @@
 					    </div>
 					</div>
 				</div>
+
 				<br>
 				<div id="user_filter">
 					
 				</div>
 			</div>
-
 		</div>
-
-		<div class="col-md-6">
-
-		</div>
-	</div>
+	</div><!--end of row-->
 		
-</div>	
+</div><!--end of container-->
 @endsection
 
 
@@ -75,6 +78,7 @@
 	    var token = '{{ Session::token() }}';
 	    var csrf = '{{ csrf_field() }}';
 	    var user_filter = "{{route('sms.filter')}}";
+	    var getPatientID = "{{route('get.patientid')}}";
 	</script>
 
 	{!! Html::script('js/parsley.min.js') !!}

@@ -21,7 +21,7 @@ $(document).ready(function(){
 								'<td><input type="number" name="patient_weight" value="0" class="col-xs-12"></input></td>'+
 								'<td><input type="number" name="patient_height" value="0" class="col-xs-12"></input></td>'+
 								'<td><input type="number" name="patient_headcircumference" value="0" class="col-xs-12"></input></td>'+
-								'<td><input type="number" name="patient_age" value="0" class="col-xs-12"></input></td>'+
+								'<td></td>'+
 								'<td><select maxlength="1" name="patient_sex"><option value="M" >M</option><option value="F" >F</option></select></td>'+
 								'<td><input type="text" name="patient_mother_name" class="col-xs-12"></input></td>'+
 								'<td><input type="text" name="patient_father_name" class="col-xs-12"></input></td>'+
