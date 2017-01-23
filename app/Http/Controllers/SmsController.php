@@ -139,8 +139,8 @@ class SmsController extends Controller
 
     public function sendmessage(Request $request){
 
-        $dstno = '639973401805;639398689992';
-        $msg = 'Baby Vaccine Tracker';
+        $dstno = $request->patient_numbers;
+        $msg = $request->message;
         $username = 'cmeniano';
         $password = 'Eldertale1';
         $type = 1;
