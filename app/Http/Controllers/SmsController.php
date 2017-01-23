@@ -137,16 +137,15 @@ class SmsController extends Controller
     }   
 
     public function sendmessage(){
-        $username = 'c31216';
+        $username = 'otahchan';
         $password = 'Eldertale1';
-        $dstno = '09973401805';
+        $dstno = '639973401805';
         $msg = 'hello';
         $type = 1;
         $senderid = 12345;
 
-        $sendlink = "http://www.isms.com.my/isms_send.php?un=".urlencode($username)."&pwd=".urlencode($password)."&dstno=".$dstno."&msg=".urlencode($msg)."&type=".$type."&sendid=".$senderid;
-
-        mail($sendlink, '', 'sdfasdfa', 'From: $from\n');
+        $sendlink = "http://www.isms.com.my/isms_send.php?un=".urlencode($username)."&pwd=".urlencode($password)."&dstno=".$dstno."&msg=".urlencode($msg)."&type=".$type."&sendid=".$senderid; 
+        fopen($sendlink, "r");
 
     }
 }
