@@ -144,7 +144,8 @@ class SmsController extends Controller
         $type = 1;
         $senderid = 12345;
 
-        $sendlink = "http://www.isms.com.my/isms_send.php?un=".urlencode($username)."&pwd=".urlencode($password)."&dstno=".$dstno."&msg=".urlencode($msg)."&type=".$type."&sendid=".$senderid);
+        $sendlink = "http://www.isms.com.my/isms_send.php?un=".urlencode($username)."&pwd=".urlencode($password)."&dstno=".$dstno."&msg=".urlencode($msg)."&type=".$type."&sendid=".$senderid;
+
         mail($sendlink, '', 'sdfasdfa', 'From: $from\n');
 
     }
