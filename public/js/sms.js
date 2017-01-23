@@ -41,6 +41,7 @@ $(document).ready(function(){
 				url: getPatientID,
 				success: function(data){
 					$("#phone_numbers").html(data);
+					$("input[name=patient_numbers]").val(data);
 				}
 		});
 

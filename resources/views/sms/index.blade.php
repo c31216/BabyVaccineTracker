@@ -47,10 +47,11 @@
 
 								{!! Form::open(['route' => 'sms.send','data-parsley-validate' => '']) !!}
 
-								{{ Form::textarea('notes') }}<br>
+								{{ Form::textarea('message') }}<br>
+								{{ Form::hidden('patient_numbers', null, ['class' => 'form-control', 'required' => '', 'maxlength' => '255']) }}
 								{{ Form::submit('Send Message', ['class' => 'btn btn-success']) }}
 								{!! Form::close() !!}
-
+								
 					        </div>
 					        <div class="modal-footer">
 					          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

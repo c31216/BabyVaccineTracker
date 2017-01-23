@@ -128,24 +128,25 @@ class SmsController extends Controller
         foreach ($patients as $patient) {
             if ($patient->patient_phonenumber) {
 
-                 $output .= $patient->patient_phonenumber . ", ";
+                 $output .= $patient->patient_phonenumber . ";";
             }
         
 
         }
-        echo rtrim($output,', ');
+        echo rtrim($output,';');
     }   
 
-    public function sendmessage(){
+    public function sendmessage(Request $request){
+        
+        $dstno = $request->patient_numbers;
+        $msg = $request->message;
         $username = 'otachan';
         $password = 'Eldertale1';
-        $dstno = '639973401805';
-        $msg = 'hello';
         $type = 1;
         $senderid = 12345;
 
         $sendlink = "http://www.isms.com.my/isms_send.php?un=".urlencode($username)."&pwd=".urlencode($password)."&dstno=".$dstno."&msg=".urlencode($msg)."&type=".$type."&sendid=".$senderid; 
         fopen($sendlink, "r");
-
+        
     }
 }
