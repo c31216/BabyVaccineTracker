@@ -263,10 +263,10 @@ class PostController extends Controller
          }
 
 
-        $pdf = \PDF::loadView('pdf/pdf',['patients' => $patient,'vaccinationdates' => $vaccination_date, 'tookvaccines' => $TookVaccine]);
+        $pdf = PDF::loadView('pdf/pdf',['patients' => $patient,'vaccinationdates' => $vaccination_date, 'tookvaccines' => $TookVaccine]);
         $pdf->setPaper('A4', 'landscape');
 
-        return $pdf->stream('ImmunizationRecord.pdf');
+        return @$pdf->stream('ImmunizationRecord.pdf');
 
     }
 
