@@ -24,8 +24,6 @@ class SmsController extends Controller
          
         $vaccine = Vaccine::all();
         $balance = 'http://www.isms.com.my/isms_balance.php?un=otachan&pwd=Eldertale1';
-        echo fopen($balance, "r");
-
    
         return view('sms.index')->withVaccines($vaccine);
     }
@@ -148,7 +146,7 @@ class SmsController extends Controller
         $type = 1;
         $senderid = 12345;
 
-        $sendlink = "http://www.isms.com.my/isms_send.php?un=".urlencode($username)."&pwd=".urlencode($password)."&dstno=".$dstno."&msg=".urlencode($msg)."&type=".$type."&sendid=".$senderid; 
+        $sendlink = "https://www.isms.com.my/isms_send.php?un=".urlencode($username)."&pwd=".urlencode($password)."&dstno=".$dstno."&msg=".urlencode($msg)."&type=".$type."&sendid=".$senderid; 
         fopen($sendlink, "r");
 
     }
