@@ -24,7 +24,9 @@ class SmsController extends Controller
          
         $vaccine = Vaccine::all();
         $balance = 'http://www.isms.com.my/isms_balance.php?un=otachan&pwd=Eldertale1';
-        echo $balance;
+        echo fopen($balance, "r");
+
+   
         return view('sms.index')->withVaccines($vaccine);
     }
 
