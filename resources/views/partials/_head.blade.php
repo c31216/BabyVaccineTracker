@@ -9,7 +9,7 @@
 
 <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <!-- css -->
-{{ Html::style('css/bootstrap.min.css') }}
+{{ Html::style('css/bootstrap.css') }}
 {{ Html::style('css/font-awesome.min.css') }}
 {{ Html::style('css/style.css') }}
 

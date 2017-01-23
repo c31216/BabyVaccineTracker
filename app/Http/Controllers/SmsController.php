@@ -150,6 +150,23 @@ class SmsController extends Controller
         $sendlink = "https://www.isms.com.my/isms_send.php?un=".urlencode($username)."&pwd=".urlencode($password)."&dstno=".$dstno."&msg=".urlencode($msg)."&type=".$type."&sendid=".$senderid; 
         fopen($sendlink, "r");
 
+        // $fields = array();
+        // $fields["api"] = "XXXXXXXXXXXXX";
+        // $fields["number"] = $one_number; //safe use 63
+        // $fields["message"] = $string_message;
+        // $fields["from"] = $string_from;
+        // $fields_string = http_build_query($fields);
+        // $outbound_endpoint = "http://api.semaphore.co/api/sms"
+        // $ch = curl_init();
+        // curl_setopt($ch, CURLOPT_URL, $outbound_endpoint);
+        // curl_setopt($ch,CURLOPT_POST, count($fields));
+        // curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
+        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        // $output = curl_exec($ch);
+        // curl_close($ch);  http://www.semaphore.co/ no free trial, outbound = 0.5 php inbound = 4
+        // /https://www.itexmo.com/Developers/packages/index.php - per month
+        //https://manage.plivo.com/accounts/register/ 0.40 php
+
         Session::flash('Success', 'Your Message Has Been Sent');
         return redirect()->route('sms.index');
 
