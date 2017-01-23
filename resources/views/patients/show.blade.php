@@ -87,10 +87,13 @@
           @for($i = 0; $i < 12; $i++)
 
             @if(isset($immunizationstatuses[$i]))
-              <td class="date {{$patients->PatientID}}">{{$immunizationstatuses[$i]['vaccination_received']}}
+              <td class="date {{$patients->PatientID}}" id="{{$immunizationstatuses[$i]['vaccine_id']}}">{{$immunizationstatuses[$i]['vaccination_received']}}<br>
+              @if($immunizationstatuses[$i]['hospital_type'] == 'private')
+              {{$immunizationstatuses[$i]['hospital_type']}}
+              @endif
               </td>
             @else
-              <td class="date">Empty</td>
+              <td class="">Empty</td>
             @endif
             
           @endfor

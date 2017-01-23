@@ -131,7 +131,8 @@ class PostController extends Controller
     {
 
         $patient = Patient::find($id);
-        $immunizationstatus = Immunization::where('patient_id', '=' , $id)->orderBy('ImmunizationID','desc')->get();
+        $immunizationstatus = Immunization::where('patient_id', '=' , $id)->orderBy('ImmunizationID','asc')->get();
+
         $TookVaccine = Vaccine::whereDoesntHave('users', function($q) use($id) {
          $q->where('patients.PatientID', $id);
         })->get();
@@ -289,11 +290,10 @@ class PostController extends Controller
 
          $patient_id = $request['col'];
 
-        $immunizationstatuses = Immunization::where('patient_id', '=' , $patient_id)->first();
- 
-        $immunizationstatuses->vaccination_received = $request->value;
-
-        $immunizationstatuses->save();
+        DB::table('immunizations')
+            ->where('patient_id', $patient_id)
+            ->where('vaccine_id', $request->id)
+            ->update(['vaccination_received' => $request->value,'hospital_type' => 'private']);
         
         echo $request->value;
 
