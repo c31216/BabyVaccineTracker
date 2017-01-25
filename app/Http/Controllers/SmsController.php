@@ -98,17 +98,33 @@ class SmsController extends Controller
     public function filter(Request $request){
         $vaccine_id = $request->vaccine_id;
 
-        $users = Patient::whereDoesntHave('users', function($q) use($vaccine_id){
+        $patients = Patient::whereDoesntHave('users', function($q) use($vaccine_id){
             $q->where('vaccine_id', '=', $vaccine_id);
         })->get();
 
-        if ($users->isEmpty()) {
+        if ($patients->isEmpty()) {
             echo "";
             
         }else{    
 
-            foreach ($users as $user) {
-            echo "<input type='checkbox' class='users' checked name='".$user->PatientID."' value='".$user->PatientID."'> " . $user->patient_lname . ", " . $user->patient_fname . " <br>";
+            foreach ($patients as $patient) {
+                
+       
+
+          
+
+            echo    "<div class='[ form-group ]'>
+                        <input type='checkbox' class='users' checked name='".$patient->PatientID."' value='".$patient->PatientID."' id='".$patient->PatientID."' autocomplete='off' />
+                        <div class='[ btn-group ]'>
+                            <label for='".$patient->PatientID."' class='[ btn btn-primary ]'>
+                                <span class='[ glyphicon glyphicon-ok ]'></span>
+                                <span> </span>
+                            </label>
+                            <label for='fancy-checkbox-primary' class='[ btn btn-default active ]'>
+                                " . $patient->patient_lname . ", " . $patient->patient_fname . "
+                            </label>
+                        </div>
+                    </div>";
             }
         }
 

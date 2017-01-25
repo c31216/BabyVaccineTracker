@@ -11,7 +11,7 @@ class PatientsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('patients')->delete();
+        DB::table('patients')->truncate();
 
         $patients = [
         				[

@@ -132,10 +132,42 @@ $(document).on('click', ".select", function () {
 });
 
 
+$.editable.addInputType('text', {
+element : function(settings, original) {
+    var input = $('<input type="text" id="a" class="form-control">');
+    $(this).append(input);
+    return(input);
+},
+submit : function (settings, original) {
+    if (isNaN($(original).val())) {
+        alert('You must provide a number')
+        return false;
+    } else {
+        return true;
+    }
+}
+});
+
+$.editable.addInputType('select', {
+element : function(settings, original) {
+    var input = $('<select class="form-control custom-form-control" ><option value="M">M</option><option value="F">F</option>');
+    $(this).append(input);
+    return(input);
+},
+submit : function (settings, original) {
+    if (isNaN($(original).val())) {
+        alert('You must provide a number')
+        return false;
+    } else {
+        return true;
+    }
+}
+});
+
 
 $.editable.addInputType('number', {
 element : function(settings, original) {
-    var input = $('<input type="number">');
+    var input = $('<input type="number" class="form-control">');
     $(this).append(input);
     return(input);
 },
@@ -155,6 +187,7 @@ submit : function (settings, original) {
      event: 'click',
      indicator : 'saving ...',
      select : true,
+     type: 'text',
      submitdata : function(value, settings) {
        return {_method: "PUT",_token:token,col:$(this).attr("class").split(' ')[1]};
    	},
@@ -235,7 +268,6 @@ $('.select').editable(edit_submit, {
     data   : " {'M':'M','F':'F'}",
     event: 'click',
     indicator : 'saving ...',
-    select : true,
     type: 'select',
     submit: 'Ok',
     submitdata : function(value, settings) {
@@ -269,7 +301,7 @@ $('.select').editable(edit_submit, {
 
 $.editable.addInputType('datepicker', {
     element: function(settings, original) {
-        var input = $('<input/>');
+        var input = $('<input class="form-control date-form-control"/>');
         $(this).append(input);
         return (input);
     },

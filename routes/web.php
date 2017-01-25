@@ -28,6 +28,10 @@ Route::post('user_filter', [
     'as' => 'sms.filter', 'uses' => 'SmsController@filter'
 ]);
 
+Route::post('autocomplete', [
+    'as' => 'posts.autocomplete', 'uses' => 'PostController@autocomplete'
+]);
+
 Route::post('getpatientid', [
     'as' => 'get.patientid', 'uses' => 'SmsController@getPatientID'
 ]);

@@ -1,6 +1,6 @@
  $.editable.addInputType('datepicker', {
     element: function(settings, original) {
-        var input = $('<input/>');
+        var input = $('<input class="form-control"/>');
         $(this).append(input);
         return (input);
     },

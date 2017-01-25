@@ -17,12 +17,12 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col-md-4">
+		<div class="col-md-6">
 			<br>
 			<h4>Babies who has not yet taken: </h4>
 			<br>
 			
-			<div class="form-group col-xs-9 col-lg-9">
+			<div class="form-group col-xs-4 col-md-6 col-lg-6">
 				<select class="form-control" name="vaccine_id" selected="selected">
 					<option value="">Select A Vaccine</option>
 				   	@foreach ($vaccines as $vaccine)
@@ -63,7 +63,7 @@
 
 				<br>
 				<div id="user_filter">
-					
+
 				</div>
 			</div>
 		</div>

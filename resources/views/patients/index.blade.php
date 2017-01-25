@@ -21,9 +21,15 @@
     </div>
 
     <br>
-    {{ Form::label('search', "Search: ") }}
-    {{ Form:: text('search', null, ['id'=>'search'])}}
+    <form class="form-inline">
+      <div class="form-group">
+        {{ Form::label('search', "Search: ") }}
 
+        {{ Form:: text('search', null, ['id'=>'search','class' => 'form-control'])}}
+
+      </div>
+    </form>
+    
     <hr>
         <h3>Records <a href="#" id="add-record"><img class="add-record-button" src="/img/add_record.png"></a></h3>
         <p>Sort by:</p>
@@ -52,6 +58,8 @@
             <th>Name of father</th>
             <th>Name of guardian</th>
             <th>Address</th>
+            <th>Phone number</th>
+
             
 
           </tr>
@@ -63,6 +71,7 @@
             <tr>
               <td class="date patient_registration_date" id="{{$patient->PatientID}}">{{$patient->patient_registration_date}}</td>
               <td class="date patient_bdate" id="{{$patient->PatientID}}">{{$patient->patient_bdate}}</td>
+              <div class="form-group">
               <td class="edit patient_lname" id="{{$patient->PatientID}}">{{$patient->patient_lname}}</td>
               <td class="edit patient_fname" id="{{$patient->PatientID}}">{{$patient->patient_fname}}</td>
               <td class="number patient_weight" id="{{$patient->PatientID}}">{{$patient->patient_weight}}</td>
@@ -74,6 +83,7 @@
               <td class="edit patient_father_name" id="{{$patient->PatientID}}">{{$patient->patient_father_name}}</td>
               <td class="edit patient_guardian_name" id="{{$patient->PatientID}}">{{$patient->patient_guardian_name}}</td>
               <td class="edit patient_address" id="{{$patient->PatientID}}">{{$patient->patient_address}}</td>
+              <td class="number patient_phonenumber" id="{{$patient->PatientID}}">{{$patient->patient_phonenumber}}</td>
               {{-- <td><input type="hidden" name="_method" value="PUT" /></td> --}}
 
               <td>

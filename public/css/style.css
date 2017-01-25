@@ -198,9 +198,44 @@ html,body {
      cursor: pointer; 
 }
 .required{
-        background-color: #d9534f;
-        color: white;
+        border-color: #d9534f;
+        color: #d9534f;
 }
 .error {
 color: red;
+}
+
+#a.form-control{
+	width: 100px;
+}
+.custom-form-control{
+	width: 60px;
+}
+.date-form-control{
+	width: 100px;
+}
+label#value-error.warning{
+	color: #d9534f;
+}
+
+.form-group input[type="checkbox"] {
+    display: none;
+}
+
+.form-group input[type="checkbox"] + .btn-group > label span {
+    width: 20px;
+}
+
+.form-group input[type="checkbox"] + .btn-group > label span:first-child {
+    display: none;
+}
+.form-group input[type="checkbox"] + .btn-group > label span:last-child {
+    display: inline-block;   
+}
+
+.form-group input[type="checkbox"]:checked + .btn-group > label span:first-child {
+    display: inline-block;
+}
+.form-group input[type="checkbox"]:checked + .btn-group > label span:last-child {
+    display: none;   
 }

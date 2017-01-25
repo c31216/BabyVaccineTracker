@@ -11,7 +11,7 @@ class VaccinesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('vaccines')->delete();
+        DB::table('vaccines')->truncate();
 
         $vaccines = [
         				['vaccine_name' => 'BCG','vaccine_part' => '1'],

@@ -14,20 +14,21 @@ $(document).ready(function(){
 	addrecord.click(function(e){
 		e.preventDefault();
 		clicked_addrecord = true;
-		$("#p_list").prepend('<tr id="active"><td><input type="text" name="patient_registration_date" value="'+output+'" data-toggle="datepicker" class="col-xs-12" ></input></td>'+
-								'<td><input type="text" name="patient_bdate" data-toggle="datepicker" value="'+output+'" id="daterange" class="col-xs-12 docs-date"></input></td>'+
-								'<td><input type="text" name="patient_lname" class="col-xs-12"></input></td>'+
-								'<td><input type="text" name="patient_fname" class="col-xs-12""></input></td>'+
-								'<td><input type="number" name="patient_weight" value="0" class="col-xs-12"></input></td>'+
-								'<td><input type="number" name="patient_height" value="0" class="col-xs-12"></input></td>'+
-								'<td><input type="number" name="patient_headcircumference" value="0" class="col-xs-12"></input></td>'+
+		$("#p_list").prepend('<tr id="active"><td><input type="text" name="patient_registration_date" value="'+output+'" data-toggle="datepicker" class="col-xs-12 form-control" ></input></td>'+
+								'<td><input type="text" name="patient_bdate" data-toggle="datepicker" value="'+output+'" id="daterange" class="col-xs-12 form-control"></input></td>'+
+								'<td><input type="text" name="patient_lname" class="col-xs-12 filter form-control"></input></td>'+
+								'<td><input type="text" name="patient_fname" class="col-xs-12 filter form-control"></input></td>'+
+								'<td><input type="number" name="patient_weight" value="0" class="col-xs-12 form-control"></input></td>'+
+								'<td><input type="number" name="patient_height" value="0" class="col-xs-12 form-control"></input></td>'+
+								'<td><input type="number" name="patient_headcircumference" value="0" class="col-xs-12 form-control"></input></td>'+
 								'<td></td>'+
-								'<td><select maxlength="1" name="patient_sex"><option value="M" >M</option><option value="F" >F</option></select></td>'+
-								'<td><input type="text" name="patient_mother_name" class="col-xs-12"></input></td>'+
-								'<td><input type="text" name="patient_father_name" class="col-xs-12"></input></td>'+
-								'<td><input type="text" name="patient_guardian_name" class="col-xs-12"></input></td>'+
-								'<td><input type="text" name="patient_address" class="col-xs-12"></input></td>'+
-								'<td id="hidden"><input type="text" name="patient_uname" class="col-xs-12"></input></td>'+csrf+
+								'<td><select maxlength="1" name="patient_sex" class="form-control custom-form-control"><option value="M">M</option><option value="F" >F</option></select></td>'+
+								'<td><input type="text" name="patient_mother_name" class="col-xs-12 form-control"></input></td>'+
+								'<td><input type="text" name="patient_father_name" class="col-xs-12 form-control"></input></td>'+
+								'<td><input type="text" name="patient_guardian_name" class="col-xs-12 form-control"></input></td>'+
+								'<td><input type="text" name="patient_address" class="col-xs-12 filter form-control"></input></td>'+
+								'<td><input type="number" placeholder="63XXXXXXXXXX" name="patient_phonenumber" class="col-xs-12 form-control"></input></td>'+
+								'<td id="hidden"><input type="text" name="patient_uname" class="col-xs-12 filter form-control"></input></td>'+csrf+
 							'</tr>');
 		event.stopPropagation();
 		$("tr#active td input[name=patient_lname]").focus();
@@ -63,6 +64,7 @@ $(document).ready(function(){
 			var patient_father_name = $("input[name=patient_father_name]").val();
 			var patient_guardian_name = $("input[name=patient_guardian_name]").val();
 			var patient_address = $("input[name=patient_address]").val();
+			var patient_phonenumber = $("input[name=patient_phonenumber]").val();
 			var patient_registration_date = $("input[name=patient_registration_date]").val();
 
 			var patient_bdate = patient_bdate.replace(/\//g, "-");
@@ -73,7 +75,7 @@ $(document).ready(function(){
 			$.ajax({
 	          type: 'POST',
 	          url: add,
-	          data: {patient_uname:patient_uname,patient_father_name:patient_father_name,patient_guardian_name:patient_guardian_name,patient_headcircumference:patient_headcircumference,patient_registration_date:patient_registration_date,patient_bdate:patient_bdate,patient_lname:patient_lname,patient_fname:patient_fname,patient_weight:patient_weight,patient_height:patient_height,patient_age:patient_age,patient_sex:patient_sex,patient_mother_name:patient_mother_name,patient_address:patient_address,_token:token},
+	          data: {patient_phonenumber:patient_phonenumber,patient_uname:patient_uname,patient_father_name:patient_father_name,patient_guardian_name:patient_guardian_name,patient_headcircumference:patient_headcircumference,patient_registration_date:patient_registration_date,patient_bdate:patient_bdate,patient_lname:patient_lname,patient_fname:patient_fname,patient_weight:patient_weight,patient_height:patient_height,patient_age:patient_age,patient_sex:patient_sex,patient_mother_name:patient_mother_name,patient_address:patient_address,_token:token},
 	          success: function(data){
 	         	if (data.patient_id) {
 
@@ -122,14 +124,13 @@ $(document).ready(function(){
 		          	addrecord.show();
 		          	clicked_addrecord = false;
 	          	}else{
-	          		
+	          		$.each(data.field_name, function( i, l ){
+					  $("input[name="+l+"]").addClass("required");
+					});
 	          		$("#validation").removeClass('alert-success');
 	          		$("#validation").show().addClass('alert-danger');
 	          		$("#validation strong").html('Failed: ' + data.input + '<br>');
-	          		$('tr td input').filter(function() {
-					    return !this.value;
-					}).attr("placeholder", "Required").addClass("required");
-					
+	          	
 				 	// if (!valid_lic_num.test(raw_patient_uname)) {  
 						// $("input[name=patient_uname]").addClass("required");
 			   //  	} 

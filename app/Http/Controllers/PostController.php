@@ -65,6 +65,8 @@ class PostController extends Controller
                 'patient_height' => 'required|max:255|integer',
                 'patient_sex' => 'required|min:1|in:F,M,',
                 'patient_address' => 'required|max:255',
+                'patient_phonenumber' => 'required|regex:(639)|size:12',
+                'patient_uname' => 'required|max:255|unique:patients',
                 'patient_headcircumference' => 'required|max:255|integer',
         ]);
         
@@ -77,7 +79,7 @@ class PostController extends Controller
                 $output .= $error_message;
             }
 
-          return response()->json(['input' => $output]);
+          return response()->json(['input' => $output, 'field_name' => $validator->errors()->keys()]);
 
 
         }else{
@@ -105,6 +107,7 @@ class PostController extends Controller
             $patient->patient_guardian_name = $request->patient_guardian_name;
             $patient->patient_father_name = $request->patient_father_name;
             $patient->patient_address = $request->patient_address;
+            $patient->patient_phonenumber = $request->patient_phonenumber;
             $patient->patient_registration_date = $request->patient_registration_date;
             $patient->patient_uname = $request->patient_uname;
             $patient->patient_pass = 'user_pass';
@@ -113,6 +116,7 @@ class PostController extends Controller
            
 
             return response()->json(['patient_id' => $patient->PatientID]);
+            
         }
        
       
@@ -281,6 +285,27 @@ class PostController extends Controller
         
         echo $request->value;
 
+    }
+
+    public function autocomplete(Request $request){
+
+        if ($request->ajax()) {
+            $output = "";
+            if ($request->inputval) {
+                $patients = Patient::orderBy('PatientID', 'asc')->where('patient_address','like', $request->inputval.'%')->groupBy('patient_address')->get();
+                
+                if ($patients) {
+                    foreach ($patients as  $patient) {
+                        $output .= "<li class='ui-menu-item'><a>".$patient->patient_address."</a></li>";
+                                  
+                    }
+
+                    return Response($output);
+                }else{
+                    return Response('Not found');
+                }
+            }
+        }
     }
 
   
