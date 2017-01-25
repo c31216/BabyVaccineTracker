@@ -158,7 +158,7 @@ class SmsController extends Controller
 
         $dstno = $request->patient_numbers;
         $msg = $request->message;
-        $username = 'cmeniano';
+        $username = 'c31216';
         $password = 'Eldertale1';
         $type = 1;
         $senderid = 'MexicoRHC';

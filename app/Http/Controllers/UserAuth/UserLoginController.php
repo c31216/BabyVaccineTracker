@@ -11,6 +11,7 @@ use Validator;
 use App\Vaccine;
 use App\Immunization;
 use PDF;
+use Hash;
 
 class UserLoginController extends Controller
 {
@@ -64,11 +65,10 @@ class UserLoginController extends Controller
             'patient_pass' => 'required|max:255',
         ]);
 
-    	$patient = Patient::where('patient_uname', '=', $request->patient_uname)->
-    						where('patient_pass', '=', $request->patient_pass)->first();
+    	$patient = Patient::where('patient_uname', '=', $request->patient_uname)->first();
 
 
-    	if ($patient) {
+    	if ($patient && Hash::check($request->patient_pass, $patient->patient_pass)) {
 
     		Session::put('PatientID', $patient->PatientID);
     		return redirect()->route('user.index');
@@ -80,14 +80,6 @@ class UserLoginController extends Controller
     		return redirect()->route('user.login')->withErrors($validator);
 
     	}
-    	// $patient_uname_db = $patient->patient_uname;
-    	// $patient_pass_db = $patient->patient_pass;
-
-    	// if ($request->patient_uname == $patient_uname_db && $request->patient_pass == $patient_pass_db) {
-    	// 	echo 'sdfs';
-    	// }else{
-    	// 	echo 'failed';
-    	// }
     }
 	
 }

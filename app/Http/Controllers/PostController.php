@@ -110,7 +110,7 @@ class PostController extends Controller
             $patient->patient_phonenumber = $request->patient_phonenumber;
             $patient->patient_registration_date = $request->patient_registration_date;
             $patient->patient_uname = $request->patient_uname;
-            $patient->patient_pass = 'user_pass';
+            $patient->patient_pass = md5('user_pass');
             $patient->save();
 
            
