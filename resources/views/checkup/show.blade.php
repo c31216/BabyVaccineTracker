@@ -246,7 +246,6 @@
 	</script>
 	{!! Html::script('js/parsley.min.js') !!}
     {!! Html::script('dist/datepicker.js') !!}
-    {!! Html::script('js/checkup.js') !!}
     
 
 

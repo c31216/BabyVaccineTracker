@@ -84,17 +84,44 @@
           <td>12-13-16</td>
           <td>12-13-16</td>
           <td>12-13-16</td>
+          <?php $count = 1;?>
           @for($i = 0; $i < 12; $i++)
+            <?php $count;?>
+            @if(isset($immunizationstatuses[$i]))<!--first if-->
+              
+              @for($x= $i+1; $x <= 12; $x++)<!--second for-->
 
-            @if(isset($immunizationstatuses[$i]))
-              <td class="date {{$patients->PatientID}}" id="{{$immunizationstatuses[$i]['vaccine_id']}}">{{$immunizationstatuses[$i]['vaccination_received']}}<br>
-              @if($immunizationstatuses[$i]['hospital_type'] == 'private')
-              {{$immunizationstatuses[$i]['hospital_type']}}
+                @if($immunizationstatuses[$i]['vaccine_id'] == $x)<!--second if-->
+                <?php $count = 1; ?>
+                <td class="date {{$immunizationstatuses[$i]['vaccine_id']}}" id="{{$patients->PatientID}}">{{$immunizationstatuses[$i]['vaccination_received']}}<br>
+
+                  @if($immunizationstatuses[$i]['hospital_type'] == 'private')<!--third if-->
+
+                    {{$immunizationstatuses[$i]['hospital_type']}}
+
+                  @endif<!--third endif-->
+                
+                 
+                </td>
+                @else<!--second else-->
+                <td class="store {{$i+1}}" id="{{$patients->PatientID}}">Empty</td>
+                
+                @continue
+                @endif<!--second endif-->
+              
+                @break
+              @endfor<!--second endfor-->
+            @else<!--first else-->
+              
+              @if($count == 1)
+
+              <td class="store {{$i+1}}" id="{{$patients->PatientID}}">Empty</td>
+              <?php $count = 0;?>
+                @else
+                <td>Empty</td>
               @endif
-              </td>
-            @else
-              <td class="">Empty</td>
-            @endif
+
+            @endif<!--first endif-->
             
           @endfor
       </tbody>
@@ -203,9 +230,10 @@
 
 
      <script>
-       var token = '{{ Session::token() }}';
-       var csrf = '{{ csrf_field() }}';
-       var edit_submit = '{{ route('hospitaltype.update') }}';
+        var token = '{{ Session::token() }}';
+        var csrf = '{{ csrf_field() }}';
+        var edit_submit = '{{ route('hospitaltype.update') }}';
+        var store = '{{ route('hospitaltype.store_hospital_type') }}';
      </script>
 
 @endsection

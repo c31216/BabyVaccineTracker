@@ -82,6 +82,7 @@ class ImmunizeController extends Controller
         $immunizationstatus = Immunization::join('vaccines', 'vaccines.VaccineID', '=', 'immunizations.vaccine_id')
             ->select('immunizations.*', 'vaccines.vaccine_name')
             ->where('patient_id','=', $id)
+            ->where('hospital_type', '=', 'public')
             ->get();
 
         $TookVaccine = Vaccine::whereDoesntHave('users', function($q) use($id) {

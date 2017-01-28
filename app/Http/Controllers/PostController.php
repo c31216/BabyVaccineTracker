@@ -276,14 +276,46 @@ class PostController extends Controller
 
     public function update_hospital_type(Request $request){
 
-         $patient_id = $request['col'];
+         $vaccine_id = $request['vaccine_id'];
 
         DB::table('immunizations')
-            ->where('patient_id', $patient_id)
-            ->where('vaccine_id', $request->id)
+            ->where('patient_id', $request->id)
+            ->where('vaccine_id', $vaccine_id)
             ->update(['vaccination_received' => $request->value,'hospital_type' => 'private']);
         
         echo $request->value;
+
+    }
+
+    public function store_hospital_type(Request $request){
+
+        // $validator = Validator::make($request->all(), [
+        //         'patient_fname' => 'required|max:50|min:2',
+        //         'patient_lname' => 'required|max:50|min:2',
+        //         'patient_bdate' => 'required|max:255',
+        //         'patient_weight' => 'required|max:255|integer',
+        //         'patient_height' => 'required|max:255|integer',
+        //         'patient_sex' => 'required|min:1|in:F,M,',
+        //         'patient_address' => 'required|max:255',
+        //         'patient_phonenumber' => 'required|regex:(639)|size:12',
+        //         'patient_uname' => 'required|max:255|unique:patients',
+        //         'patient_headcircumference' => 'required|max:255|integer',
+        // ]);
+            $immunization = new Immunization;
+            $immunization->vaccine_id = $request['vaccine_id'];
+            $immunization->immunization_description = 'empty';
+            $immunization->midwife_name = 'empty';
+            $immunization->patient_id = $request->id;
+            $immunization->vaccination_received =  Carbon::now()->toDateString();;
+            $immunization->patient_weight = 0;
+            $immunization->patient_height = 0;
+            $immunization->hospital_type = 'private';
+            $immunization->save();
+
+            // return response()->json(['patient_id' => $immunization->PatientID]);
+
+
+         
 
     }
 

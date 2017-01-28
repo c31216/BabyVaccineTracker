@@ -2,13 +2,15 @@
 $(function(){
 	var $vaccine_id = $('#a option').val();
 	$('input[name=expected_vaccine]').val($vaccine_id);
-	$('input.btn').click(function(){
+	$('input.btn').submit(function(){
+
 		$selected_id = $('select#a').find(":selected").attr('value');
 		
 		$vaccine_name = $('#a option').text();
 
 		$expected_vaccine = $('#vaccines option[value='+$vaccine_id+']').text();
 
+		
 		$('#a').on('change', function (e) {
 	    	valueSelected = this.value;
 	    	if (valueSelected==$vaccine_id) {

@@ -111,12 +111,14 @@
 							@endif
 						</div>
 				    </div>
+				    @if(!$tookvaccines->isEmpty())
 				    <ul class="parsley-errors-list filled">
 				    	<li id="empty_msg"></li>
 				    </ul>
 				    <br>
-
+					
 				    {{ Form::submit('Submit', ['class' => 'btn btn-success']) }}
+					@endif
 				{!! Form::close() !!}
 				
 		      </div>
@@ -261,7 +263,6 @@
 		</script>
 		{!! Html::script('js/parsley.min.js') !!}
 	    {!! Html::script('dist/datepicker.js') !!}
-	    {!! Html::script('js/checkup.js') !!}
 	    {!! Html::script('js/immunize.validation.js') !!}
 
 	@endsection
