@@ -87,3 +87,7 @@ Route::put('updatehospitaltype', [
 Route::post('storehospitaltype', [
     'as' => 'hospitaltype.store_hospital_type', 'uses' => 'PostController@store_hospital_type'
 ]);
+
+Route::get('getvaccines', [
+    'as' => 'get.vaccines', 'uses' => 'ReportController@getvaccines'
+]);

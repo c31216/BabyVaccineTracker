@@ -6775,7 +6775,48 @@ button.close {
 		<div class="col-md-4 head">
 			<h1>Mexico Rural Health Center</h1>
 			<p>Brgy. San Antonio, Mexico, Pampanga</p>
+      <br><br>
 		</div>
 		<div class="col-md-4"></div>
 	</div>
+  <div class="row">
+    <h4>Report By {{$reportby}}</h4>
+    <br><br>
+  </div>
+  <div class="row">
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Date of <br>registration</th>
+            <th>Date of birth</th>
+            <th>Last name</th>
+            <th>First name</th> 
+            <th>Weight</th>
+            <th>Height</th>
+            <th>Age</th>
+            <th>Sex</th>
+            <th>Name of mother</th>
+            <th>Address</th>
+          </tr>
+        </thead>
+        <tbody>
+            @foreach($patients as $patient)
+              <tr>
+                  <td>{{$patient->patient_registration_date}}</td>
+                  <td>{{$patient->patient_bdate}}</td>
+                  <td>{{$patient->patient_lname}}</td>
+                  <td>{{$patient->patient_fname}}</td>
+                  <td>{{$patient->patient_weight}}</td>
+                  <td>{{$patient->patient_height}}</td>
+                  <td>{{$patient->patient_lname}}</td>
+                  <td>{{$patient->patient_sex}}</td>
+                  <td>{{$patient->patient_mother_name}}</td>
+                  <td>{{$patient->patient_address}}</td>
+              </tr>
+             @endforeach
+        </tbody>
+      </table>
+    </div><!-- Div.table-responsive-->
+  </div>
 </div>

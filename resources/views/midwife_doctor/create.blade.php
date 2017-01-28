@@ -26,7 +26,7 @@
 			    </div>
 
 				<div class="row">
-				  <div class="form-group col-xs-5 col-lg-6">
+				  <div class="form-group col-xs-7 col-lg-3">
 
 				    {{ Form::label('medicalpersonnel_name', "Name") }}
 				    {{ Form::text('medicalpersonnel_name', null, ['class' => 'form-control', 'data-toggle'=> 'datepicker','required' => '', 'data-parsley-date','maxlength' => '10']) }}

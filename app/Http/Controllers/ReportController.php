@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Patient;
 use PDF;
 use Session;
+use Carbon\Carbon;
+use App\Vaccine;
+use App\Immunization;
 
 class ReportController extends Controller
 {
@@ -86,18 +89,58 @@ class ReportController extends Controller
     }
 
     public function pdf(Request $request){
-     $patient = Patient::where($request->filter , '=' , $request->input)->get();
 
-     if ($patient->isEmpty()) {
-         Session::flash('Failed: ' , 'Record Not Found');
+    $reportby = "";
+
+    if ($request->vaccines) {
+        $vaccine_id = $request->vaccines;
+        $patient = Patient::whereHas('users', function($q) use($vaccine_id){
+            $q->where('vaccine_id', '=', $vaccine_id);
+        })->get();
+        $vaccine = Vaccine::where('VaccineID', '=', $vaccine_id)->first();
+        $reportby = "Vaccine: " . $vaccine->vaccine_name; 
+
+    }else if($request->month){
+        $month = $request->month;
+        $monthname = date("F",mktime(0,0,0,$month,1,2011));
+        $patient = Immunization::join('patients', 'patients.PatientID', '=', 'immunizations.patient_id')
+            ->select('patients.*')
+            ->whereMonth('vaccination_received', '=', $month)
+            ->get();
+
+        $reportby = "Month: " . $monthname ;
+    }else{
+        $patient = Patient::where($request->filter , '=' , $request->input)->get();
+        $reportby = "Location";
+    }
+     
+    if ($patient->isEmpty()) {
+
+         Session::flash('failed', 'Record Not Found');
          return redirect()->route('report.index');
-     }else{
-        $pdf = PDF::loadView('pdf.report',['patients' => $patient]);
+
+    }else{
+
+        $pdf = PDF::loadView('pdf.report',['patients' => $patient,'reportby' => $reportby]);
         $pdf->setPaper('A4', 'landscape');
         return $pdf->stream('ImmunizationRecord.pdf');
+
      }
     
 
 
+    }
+
+    public function getvaccines(){
+        $vaccines = Vaccine::all();
+        $output = "";
+
+        foreach ($vaccines as $vaccine) {
+
+           $output .= '<option value="'.$vaccine->VaccineID.'">'.$vaccine->vaccine_name.'</option>';
+
+        }
+
+        echo $output;
     }
 }

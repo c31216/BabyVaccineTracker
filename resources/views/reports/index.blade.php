@@ -10,7 +10,14 @@
 @section('title', 'Send a Report')
 
 @section('content')
+@if(Session::has('success'))
 
+	<div class="alert alert-success" role="alert">
+		<strong>Success: {{ Session::get('success') }}</strong>
+	</div>
+
+
+@endif
 
 	<div class="container">
 		<div class="row">
@@ -20,21 +27,19 @@
 				<div class="row">
 				  <div class="form-group col-xs-2 col-lg-2">
 
-				   <select class="form-control" name="filter">
+				   	<select class="form-control" name="filter">
 						<option value="patient_address">By Address</option>
+						<option value="month">By Month</option>
+						<option value="vaccine_id">By Vaccine</option>
 					</select>
 
 				  </div>
 			    </div>
 
 				<div class="row">
-				  <div class="form-group col-xs-6 col-lg-4">
-				      <div class="form-group">
-				        <input class="form-control bs-autocomplete" placeholder="Search" name="input" type="text" autocomplete="off">
-				          <ul class="nav nav-pills nav-stacked bs-autocomplete-menu" >
-				          	
-				          </ul>
-				          <div id="notfound"></div>
+				  <div class="form-group col-xs-6 col-lg-3">
+				      <div class="form-group" id="type">
+				        
 				      </div>
 				  </div>
 			    </div>
@@ -52,8 +57,10 @@
 		var token = '{{ Session::token() }}';
 		var csrf = '{{ csrf_field() }}';
 		var autocompleteurl = '{{ route('posts.autocomplete') }}';
+		var getvaccines = '{{ route('get.vaccines') }}';
 
 	</script>
 	{!! Html::script('js/parsley.min.js') !!}
 	{!! Html::script('js/autocomplete.js') !!}
+	{!! Html::script('js/report.js') !!}
 @endsection

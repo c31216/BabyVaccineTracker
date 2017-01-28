@@ -6,11 +6,12 @@
     },
     plugin: function(settings, original) {
         settings.onblur = 'ignore';
+
         $(this).find('input').datepicker({
-             autoclose: true,
             format: 'yyyy-mm-dd',
         });
-    },
+
+    }
 });
 
 
@@ -19,7 +20,7 @@ $('.date').editable(edit_submit, {
     event: 'click',
     type: 'datepicker',
     data: function(value, settings) {
-      return value;
+      return 'Pick a date';
     },
     submitdata : function(value, settings) {
        return {_method: "PUT",_token:token,vaccine_id:$(this).attr("class").split(' ')[1]};
@@ -53,7 +54,7 @@ $('.store').editable(store, {
     event: 'click',
     type: 'datepicker',
     data: function(value, settings) {
-      return value;
+      return 'Pick a date';
     },
     submitdata : function(value, settings) {
 
@@ -81,3 +82,4 @@ $('.store').editable(store, {
         return ($(this).valid());
     },
  });
+
