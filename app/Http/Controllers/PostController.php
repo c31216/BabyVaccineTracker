@@ -57,14 +57,68 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+                'patient_fname' => 'required|max:50|min:2',
+                'patient_lname' => 'required|max:50|min:2',
+                'patient_bdate' => 'required|max:255',
+                'patient_weight' => 'required|max:255|integer',
+                'patient_height' => 'required|max:255|integer',
+                'patient_sex' => 'required|min:1|in:F,M,',
+                'patient_address' => 'required|max:255',
+                'patient_phonenumber' => 'required|regex:(639)|size:12',
+                'patient_uname' => 'required|max:255|unique:patients',
+                'patient_headcircumference' => 'required|max:255|integer',
+        ]);
         
+        $output = "";
+        $patient_acct = "";
 
+        if ($validator->fails()) {
+
+            foreach ($validator->errors()->all('<li>:message</li>') as $error_message) {
+                $output .= $error_message;
+            }
+
+          return response()->json(['input' => $output, 'field_name' => $validator->errors()->keys()]);
+
+
+        }else{
+            $rand_num = rand(50, 10000);
+
+            $patients = Patient::orderBy('PatientID', 'desc')->first();
+
+            if ($patients) {
+                $patient_acct = $patients->PatientID . $rand_num;
+            }else{
+                $patient_acct = $rand_num;
+            }
+
+
+            DB::table('patients')->insert([
+                ['patient_fname' => $request->patient_fname,
+                 'patient_lname' => $request->patient_lname,
+                 'patient_bdate' =>$request->patient_bdate,
+                 'patient_weight' => $request->patient_weight,
+                 'patient_height' => $request->patient_height,
+                 'patient_headcircumference' => $request->patient_headcircumference,
+                 'patient_sex' => $request->patient_sex,
+                 'patient_mother_name' => $request->patient_mother_name,
+                 'patient_guardian_name' => $request->patient_guardian_name,
+                 'patient_father_name' => $request->patient_father_name,
+                 'patient_address' => $request->patient_address,
+                 'patient_phonenumber' => $request->patient_phonenumber,
+                 'patient_registration_date' => $request->patient_registration_date,
+                 'patient_uname' => $request->patient_uname,
+                 'patient_pass' => md5('user_pass'),
+
+                ]
+            ]);
 
            
 
-            return response()->json(['patient_id' => 1]);
+            return response()->json(['patient_id' => $patient->PatientID]);
             
-        
+      
        
       
         
