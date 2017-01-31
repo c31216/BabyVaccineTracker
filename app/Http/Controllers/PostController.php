@@ -95,23 +95,7 @@ class PostController extends Controller
 
 
             DB::table('patients')->insert([
-                ['patient_fname' => $request->patient_fname,
-                 'patient_lname' => $request->patient_lname,
-                 'patient_bdate' =>$request->patient_bdate,
-                 'patient_weight' => $request->patient_weight,
-                 'patient_height' => $request->patient_height,
-                 'patient_headcircumference' => $request->patient_headcircumference,
-                 'patient_sex' => $request->patient_sex,
-                 'patient_mother_name' => $request->patient_mother_name,
-                 'patient_guardian_name' => $request->patient_guardian_name,
-                 'patient_father_name' => $request->patient_father_name,
-                 'patient_address' => $request->patient_address,
-                 'patient_phonenumber' => $request->patient_phonenumber,
-                 'patient_registration_date' => $request->patient_registration_date,
-                 'patient_uname' => $request->patient_uname,
-                 'patient_pass' => md5('user_pass'),
-
-                ]
+                ['patient_fname' => $request->patient_fname]
             ]);
 
            
