@@ -303,19 +303,7 @@ class PostController extends Controller
         // ]);
            
 
-            $immunization = new Immunization;
-            $immunization->vaccine_id = 2;
-            $immunization->immunization_description = 'empty';
-            $immunization->midwife_name = 'empty';
-            $immunization->patient_id = 1;
-            $immunization->vaccination_received =  $request->value;
-            $immunization->patient_weight = 0;
-            $immunization->patient_height = 0;
-            $immunization->hospital_type = 'Private';
-            $immunization->save();
-
-            // return response()->json(['patient_id' => $immunization->PatientID]);
-            echo $request->value. '<br>' . 'Private';
+            echo 'sf';
 
          
 
