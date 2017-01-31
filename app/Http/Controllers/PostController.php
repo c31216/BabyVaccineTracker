@@ -304,7 +304,7 @@ class PostController extends Controller
             $vaccine_id = $request['vaccine_id']; 
             echo $vaccine_id;
             echo $request->value;
-            echo $request->id
+            echo $request->id;
             
 
          
