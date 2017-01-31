@@ -301,9 +301,11 @@ class PostController extends Controller
         //         'patient_uname' => 'required|max:255|unique:patients',
         //         'patient_headcircumference' => 'required|max:255|integer',
         // ]);
-           
-
-            echo 'sf';
+            $vaccine_id = $request['vaccine_id']; 
+            echo $vaccine_id;
+            echo $request->value;
+            echo $request->id
+            
 
          
 
