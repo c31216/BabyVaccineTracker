@@ -95,7 +95,7 @@
                 <?php $count = 1; ?>
                 <td class="date {{$immunizationstatuses[$i]['vaccine_id']}}" id="{{$patients->PatientID}}">{{$immunizationstatuses[$i]['vaccination_received']}}<br>
 
-                  @if($immunizationstatuses[$i]['hospital_type'] == 'private')<!--third if-->
+                  @if($immunizationstatuses[$i]['hospital_type'] == 'Private')<!--third if-->
 
                     {{$immunizationstatuses[$i]['hospital_type']}}
 

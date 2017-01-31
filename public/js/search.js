@@ -3,7 +3,7 @@ $(function(){
 	$('#search').keyup(function(){
 		var value = $(this).val();
 		// url1 = url + '/' + value;
-
+    
 		$.ajax({
           type: 'GET',
           url: url,

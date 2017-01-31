@@ -281,9 +281,9 @@ class PostController extends Controller
         DB::table('immunizations')
             ->where('patient_id', $request->id)
             ->where('vaccine_id', $vaccine_id)
-            ->update(['vaccination_received' => $request->value,'hospital_type' => 'private']);
+            ->update(['vaccination_received' => $request->value,'hospital_type' => 'Private']);
         
-        echo $request->value;
+        echo $request->value. '<br>' . 'Private';
 
     }
 
@@ -306,14 +306,14 @@ class PostController extends Controller
             $immunization->immunization_description = 'empty';
             $immunization->midwife_name = 'empty';
             $immunization->patient_id = $request->id;
-            $immunization->vaccination_received =  Carbon::now()->toDateString();;
+            $immunization->vaccination_received =  $request->value;
             $immunization->patient_weight = 0;
             $immunization->patient_height = 0;
-            $immunization->hospital_type = 'private';
+            $immunization->hospital_type = 'Private';
             $immunization->save();
 
             // return response()->json(['patient_id' => $immunization->PatientID]);
-
+            echo $request->value. '<br>' . 'Private';
 
          
 

@@ -1,135 +1,5 @@
 
 
-$(document).on('click', ".edit", function () { 
-  $('.edit').editable(edit_submit, {
-   select : true,
-   submitdata : function(value, settings) {
-     return {_method: "PUT",_token:token,col:$(this).attr("class").split(' ')[1]};
-    },
-    onsubmit: function(settings, td){
-        $(this).validate({
-            debug: true,
-            rules: {
-                value: {
-                    required: true,
-                    lettersonly: true,
-                    minlength: 2,
-                }
-            },
-            messages: {
-                lettersonly: "Invalid Input"
-            },
-            errorClass: "warning",
-            submitHandler: function() { 
-            }
-        });
-        return ($(this).valid());
-    },
-  });
-});
-$(document).on('click', ".number", function () { 
-    
-    $('.number').editable(edit_submit, {
-         event: 'click',
-         indicator : 'saving ...',
-         select : true,
-         type: 'number',
-         onsubmit: function(settings, td) {
-            var input = $(td).find('input');
-            $(this).validate({
-                rules: {
-                    'nameofinput': {
-                        number: true
-                    }
-                },
-                messages: {
-                    'actionItemEntity.name': {
-                        number: 'Only numbers are allowed'
-                    }
-                }
-            });
-
-            return ($(this).valid());
-        },
-        submitdata : function(value, settings) {
-           return {_method: "PUT",_token:token,col:$(this).attr("class").split(' ')[1]};
-        },
-        callback : function(value, settings) {
-             $(this).addClass('success');
-        }
-    });
-});
-
-
-
-$(document).on('click', ".date", function () { 
-   $('.date').editable(edit_submit, {
-     select : true,
-     type: 'datepicker',
-     data: function(value, settings) {
-      return value;
-    },
-    submitdata : function(value, settings) {
-       return {_method: "PUT",_token:token,col:$(this).attr("class").split(' ')[1]};
-    },
-    onsubmit: function(settings, td){
-        $(this).validate({
-            debug: true,
-            rules: {
-                value: {
-                    required: true,
-                    date: true,
-                }
-            },
-            messages: {
-                date: "Invalid Format"
-            },
-            errorClass: "warning",
-            submitHandler: function() { 
-            }
-        });
-        return ($(this).valid());
-    }
-  });
-});
-
-$(document).on('click', ".select", function () { 
-   $('.select').editable(edit_submit, {
-     // type     : 'textarea',
-     // onblur   : 'submit',
-    data   : " {'M':'M','F':'F'}",
-    event: 'click',
-    indicator : 'saving ...',
-    select : true,
-    type: 'select',
-    submit: 'Ok',
-    submitdata : function(value, settings) {
-       return {_method: "PUT",_token:token,col:$(this).attr("class").split(' ')[1]};
-    },
-    callback : function(value, settings) {
-         $(this).addClass('success');
-    },
-    onsubmit: function(settings, td){
-        $(this).validate({
-            debug: true,
-            rules: {
-                value: {
-                    required: true,
-                    regex: "[MF]+"
-                }
-            },
-            messages: {
-                value: "Invalid Input"
-            },
-            errorClass: "warning",
-            submitHandler: function() { 
-            }
-        });
-        return ($(this).valid());
-    }
- });
-
-});
 
 
 $.editable.addInputType('text', {
@@ -355,4 +225,130 @@ $(document).on("keyup", "input", function(e){
         
 
     $(this).removeClass("required");
+});
+
+
+$(document).delegate( "td.edit", "click", function(e) {
+    if ( e.target.nodeName=="INPUT") {
+                return;
+    }
+
+      $('.edit').editable(edit_submit, {
+   select : true,
+   submitdata : function(value, settings) {
+     return {_method: "PUT",_token:token,col:$(this).attr("class").split(' ')[1]};
+    },
+    onsubmit: function(settings, td){
+        $(this).validate({
+            debug: true,
+            rules: {
+                value: {
+                    required: true,
+                    lettersonly: true,
+                    minlength: 2,
+                }
+            },
+            messages: {
+                lettersonly: "Invalid Input"
+            },
+            errorClass: "warning",
+            submitHandler: function() { 
+            }
+        });
+        return ($(this).valid());
+    },
+  });
+    $('.number').editable(edit_submit, {
+         event: 'click',
+         indicator : 'saving ...',
+         select : true,
+         type: 'number',
+         onsubmit: function(settings, td) {
+            var input = $(td).find('input');
+            $(this).validate({
+                rules: {
+                    'nameofinput': {
+                        number: true
+                    }
+                },
+                messages: {
+                    'actionItemEntity.name': {
+                        number: 'Only numbers are allowed'
+                    }
+                }
+            });
+
+            return ($(this).valid());
+        },
+        submitdata : function(value, settings) {
+           return {_method: "PUT",_token:token,col:$(this).attr("class").split(' ')[1]};
+        },
+        callback : function(value, settings) {
+             $(this).addClass('success');
+        }
+    });
+ $('.date').editable(edit_submit, {
+     select : true,
+     type: 'datepicker',
+     data: function(value, settings) {
+      return value;
+    },
+    submitdata : function(value, settings) {
+       return {_method: "PUT",_token:token,col:$(this).attr("class").split(' ')[1]};
+    },
+    onsubmit: function(settings, td){
+        $(this).validate({
+            debug: true,
+            rules: {
+                value: {
+                    required: true,
+                    date: true,
+                }
+            },
+            messages: {
+                date: "Invalid Format"
+            },
+            errorClass: "warning",
+            submitHandler: function() { 
+            }
+        });
+        return ($(this).valid());
+    }
+  });
+$('.select').editable(edit_submit, {
+     // type     : 'textarea',
+     // onblur   : 'submit',
+    data   : " {'M':'M','F':'F'}",
+    event: 'click',
+    indicator : 'saving ...',
+    select : true,
+    type: 'select',
+    submit: 'Ok',
+    submitdata : function(value, settings) {
+       return {_method: "PUT",_token:token,col:$(this).attr("class").split(' ')[1]};
+    },
+    callback : function(value, settings) {
+         $(this).addClass('success');
+    },
+    onsubmit: function(settings, td){
+        $(this).validate({
+            debug: true,
+            rules: {
+                value: {
+                    required: true,
+                    regex: "[MF]+"
+                }
+            },
+            messages: {
+                value: "Invalid Input"
+            },
+            errorClass: "warning",
+            submitHandler: function() { 
+            }
+        });
+        return ($(this).valid());
+    }
+ });
+    
+   $(this).trigger( "click" );
 });
