@@ -114,10 +114,8 @@ class PostController extends Controller
             $patient->save();
 
 
-
+            var_dump($patient->PatientID);
            
-
-            return response()->json(['patient_id' => $patients->PatientID]);
             
         }
        

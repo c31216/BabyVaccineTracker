@@ -16,21 +16,21 @@ class CreatePatientsTable extends Migration
         Schema::create('patients', function (Blueprint $table) {
             $table->increments('PatientID');
             $table->string('patient_uname')->unique();
-            $table->string('patient_pass')->nullable();
-            $table->string('patient_fname')->nullable();
-            $table->string('patient_lname')->nullable();
-            $table->decimal('patient_weight')->nullable();
-            $table->decimal('patient_height')->nullable();
-            $table->integer('patient_age')->nullable();
-            $table->char('patient_sex')->nullable();
+            $table->string('patient_pass');
+            $table->string('patient_fname');
+            $table->string('patient_lname');
+            $table->decimal('patient_weight');
+            $table->decimal('patient_height');
+            $table->integer('patient_age');
+            $table->char('patient_sex');
             $table->string('patient_mother_name')->nullable();
             $table->string('patient_father_name')->nullable();
             $table->string('patient_guardian_name')->nullable();
-            $table->decimal('patient_headcircumference')->nullable();
-            $table->string('patient_address')->nullable();
+            $table->decimal('patient_headcircumference');
+            $table->string('patient_address');
             $table->string('patient_phonenumber')->nullable();
-            $table->date('patient_bdate')->nullable();
-            $table->date('patient_registration_date')->nullable();
+            $table->date('patient_bdate');
+            $table->date('patient_registration_date');
             $table->date('p1_completion_date')->nullable();
             $table->timestamps();
             
