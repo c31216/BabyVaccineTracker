@@ -307,7 +307,7 @@ class PostController extends Controller
             $immunization->vaccine_id = 2;
             $immunization->immunization_description = 'empty';
             $immunization->midwife_name = 'empty';
-            $immunization->patient_id = $request->id;
+            $immunization->patient_id = 1;
             $immunization->vaccination_received =  $request->value;
             $immunization->patient_weight = 0;
             $immunization->patient_height = 0;
