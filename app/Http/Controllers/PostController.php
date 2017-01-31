@@ -314,12 +314,12 @@ class PostController extends Controller
             
             DB::table('immunizations')->insert([
                 ['vaccine_id' => $vaccine_id, 'immunization_description' => 'empty', 'midwife_name' => 'empty'
-                , 'patient_id' => $request->id]
+                , 'patient_id' => $request->id
                 , 'vaccination_received' => $request->value
                 , 'patient_weight' => 0
                 , 'patient_height' => 0
                 , 'hospital_type' => 'Private'
-            ]);
+            ]]);
 
             // return response()->json(['patient_id' => $immunization->PatientID]);
             echo $request->value. '<br>' . 'Private';
