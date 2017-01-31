@@ -301,8 +301,10 @@ class PostController extends Controller
         //         'patient_uname' => 'required|max:255|unique:patients',
         //         'patient_headcircumference' => 'required|max:255|integer',
         // ]);
+            $vaccine_id = $request['vaccine_id']; 
+
             $immunization = new Immunization;
-            $immunization->vaccine_id = $request['vaccine_id'];
+            $immunization->vaccine_id = 2;
             $immunization->immunization_description = 'empty';
             $immunization->midwife_name = 'empty';
             $immunization->patient_id = $request->id;
