@@ -94,9 +94,6 @@ class PostController extends Controller
             }
 
 
-            DB::table('patients')->insert([
-                ['patient_fname' => $request->patient_fname]
-            ]);
 
            
 
