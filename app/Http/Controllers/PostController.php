@@ -117,7 +117,7 @@ class PostController extends Controller
 
            
 
-            return response()->json(['patient_id' => 1]);
+            return response()->json(['patient_id' => $patients->PatientID]);
             
         }
        
