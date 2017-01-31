@@ -303,7 +303,7 @@ class PostController extends Controller
         // ]);
             $vaccine_id = $request['vaccine_id']; 
             $immunization = new Immunization;
-            $immunization->vaccine_id = $vaccine_id;
+            $immunization->vaccine_id = 1;
             $immunization->save();
 
             // return response()->json(['patient_id' => $immunization->PatientID]);
