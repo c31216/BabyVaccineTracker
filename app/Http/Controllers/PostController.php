@@ -302,10 +302,19 @@ class PostController extends Controller
         //         'patient_headcircumference' => 'required|max:255|integer',
         // ]);
             $vaccine_id = $request['vaccine_id']; 
-            echo $vaccine_id;
-            echo $request->value;
-            echo $request->id;
-            
+            $immunization = new Immunization;
+            $immunization->vaccine_id = $vaccine_id;
+            $immunization->immunization_description = 'empty';
+            $immunization->midwife_name = 'empty';
+            $immunization->patient_id = $request->id;
+            $immunization->vaccination_received =  $request->value;
+            $immunization->patient_weight = 0;
+            $immunization->patient_height = 0;
+            $immunization->hospital_type = 'Private';
+            $immunization->save();
+
+            // return response()->json(['patient_id' => $immunization->PatientID]);
+            echo $request->value. '<br>' . 'Private';
 
          
 

@@ -15,13 +15,13 @@ class CreateImmunizationsTable extends Migration
     {
         Schema::create('immunizations', function (Blueprint $table) {
             $table->increments('ImmunizationID');
-            $table->integer('vaccine_id');
-            $table->string('immunization_description');
-            $table->string('midwife_name');
-            $table->integer('patient_id');
-            $table->date('vaccination_received');
-            $table->integer('patient_weight');
-            $table->integer('patient_height');
+            $table->integer('vaccine_id')->nullable();
+            $table->string('immunization_description')->nullable();
+            $table->string('midwife_name')->nullable();
+            $table->integer('patient_id')->nullable();
+            $table->date('vaccination_received')->nullable();
+            $table->integer('patient_weight')->nullable();
+            $table->integer('patient_height')->nullable();
             $table->string('hospital_type')->default('public');
             $table->timestamps();
         });
