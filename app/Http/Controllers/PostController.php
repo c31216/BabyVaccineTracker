@@ -83,15 +83,15 @@ class PostController extends Controller
 
 
         }else{
-            $rand_num = rand(50, 10000);
+            // $rand_num = rand(50, 10000);
 
-            $patients = Patient::orderBy('PatientID', 'desc')->first();
+            // $patients = Patient::orderBy('PatientID', 'desc')->first();
 
-            if ($patients) {
-                $patient_acct = $patients->PatientID . $rand_num;
-            }else{
-                $patient_acct = $rand_num;
-            }
+            // if ($patients) {
+            //     $patient_acct = $patients->PatientID . $rand_num;
+            // }else{
+            //     $patient_acct = $rand_num;
+            // }
 
             
 
@@ -113,9 +113,12 @@ class PostController extends Controller
             $patient->patient_pass = md5('user_pass');
             $patient->save();
 
+            $patients = Patient::orderBy('PatientID', 'desc')->first();
 
-            var_dump($patient->PatientID);
+
            
+
+            return response()->json(['patient_id' => $patients->PatientID]);
             
         }
        
