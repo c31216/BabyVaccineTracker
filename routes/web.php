@@ -62,8 +62,9 @@ Route::get('home', [
 ])->middleware('checksession');
 
 Route::get('/', function(){
+
 	return view('auth/login');
-});
+})->middleware('guest');
 
 Route::resource('add', 'MedicalPersonnelController');
 Route::resource('report', 'ReportController');

@@ -21,8 +21,9 @@
             <th>Date of birth</th>
             <th>Last name</th>
             <th>First name</th> 
-            <th>Weight</th>
-            <th>Height</th>
+            <th>Weight (kg)</th>
+            <th>Height (cm)</th>
+            <th>Head Circumference (cm)</th>
             <th>Age</th>
             <th>Sex</th>
             <th>Name of mother</th>
@@ -37,6 +38,7 @@
               <td>{{$patients->patient_fname}}</td>
               <td>{{$patients->patient_weight}}</td>
               <td>{{$patients->patient_height}}</td>
+              <td>{{$patients->patient_headcircumference}}</td>
               <td>{{Carbon::createFromFormat('Y-m-d', $patients->patient_bdate)->diff(Carbon::now())->format('%y year(s), %m month(s) and %d day(s)')}}</td>
               <td>{{$patients->patient_sex}}</td>
               <td>{{$patients->patient_mother_name}}</td>

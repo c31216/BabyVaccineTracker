@@ -22,7 +22,7 @@
 	<div class="container">
 		<div class="row">
 		<br><br>
-	 		{!! Form::open(['route' => 'report.pdf','data-parsley-validate' => '']) !!}
+	 		{!! Form::open(['route' => 'report.pdf','data-parsley-validate' => '','target' => '_blank']) !!}
 
 				<div class="row">
 				  <div class="form-group col-xs-2 col-lg-2">

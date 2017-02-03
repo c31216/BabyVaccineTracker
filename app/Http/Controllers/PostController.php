@@ -14,6 +14,7 @@ use PDF;
 use Validator;
 use DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
 
 class PostController extends Controller
 {
@@ -61,13 +62,13 @@ class PostController extends Controller
                 'patient_fname' => 'required|max:50|min:2',
                 'patient_lname' => 'required|max:50|min:2',
                 'patient_bdate' => 'required|max:255',
-                'patient_weight' => 'required|max:255|integer',
-                'patient_height' => 'required|max:255|integer',
+                'patient_weight' => 'required|integer',
+                'patient_height' => 'required|integer',
                 'patient_sex' => 'required|min:1|in:F,M,',
                 'patient_address' => 'required|max:255',
                 'patient_phonenumber' => 'required|regex:(639)|size:12',
                 'patient_uname' => 'required|max:255|unique:patients',
-                'patient_headcircumference' => 'required|max:255|integer',
+                'patient_headcircumference' => 'required|integer',
         ]);
         
         $output = "";
@@ -110,7 +111,7 @@ class PostController extends Controller
             $patient->patient_phonenumber = $request->patient_phonenumber;
             $patient->patient_registration_date = $request->patient_registration_date;
             $patient->patient_uname = $request->patient_uname;
-            $patient->patient_pass = md5('user_pass');
+            $patient->patient_pass = Hash::make('user_pass');
             $patient->save();
 
             $patients = Patient::orderBy('PatientID', 'desc')->first();

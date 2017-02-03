@@ -19,6 +19,11 @@ class ImmunizeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['pdf']]);
+    }
+    
     public function index()
     {
         //
@@ -50,6 +55,7 @@ class ImmunizeController extends Controller
                 'immunization_description' => 'required|max:255',
                 'patient_weight' => 'required|max:255|numeric',
                 'patient_height' => 'required|max:255|numeric',
+                'patient_headcircumference' => 'required|numeric',
         ]);
         $immunizationstatus = new Immunization;
         
@@ -58,8 +64,10 @@ class ImmunizeController extends Controller
         $immunizationstatus->midwife_name = $request->midwife_name;
         $immunizationstatus->vaccine_id = $request->vaccine_id;
         $immunizationstatus->immunization_description = $request->immunization_description;
+        $immunizationstatus->patient_headcircumference = $request->patient_headcircumference;
         $immunizationstatus->patient_weight = $request->patient_weight;
         $immunizationstatus->patient_height = $request->patient_height;
+        
 
         $immunizationstatus->save();
 

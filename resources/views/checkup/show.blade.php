@@ -38,12 +38,12 @@
 			    <div class="row">
 				  <div class="form-group col-xs-5 col-lg-3">
 
-				    {{ Form::label('patient_weight', "Weight") }}
+				    {{ Form::label('patient_weight', "Weight (kg)") }}
 				    {{ Form::number('patient_weight', 0, ['class' => 'form-control', 'required' => '', 'maxlength' => '255','data-parsley-type' => 'number']) }}
 				  </div>
 				  <div class="form-group col-xs-5 col-lg-3">
 
-				    {{ Form::label('patient_height', "Height") }}
+				    {{ Form::label('patient_height', "Height (cm)") }}
 				    {{ Form::number('patient_height', 0, ['class' => 'form-control', 'required' => '', 'maxlength' => '255','data-parsley-type' => 'number']) }}
 				  </div>
 			    </div>
@@ -114,8 +114,8 @@
 	          <th>Symptoms</th>
 	          <th>Prescription</th>
 	          <th>Description</th>
-	          <th>Weight</th>
-	          <th>Height</th>
+	          <th>Weight (kg)</th>
+	          <th>Height (cm)</th>
 	        </tr>
 	      </thead>
 

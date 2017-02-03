@@ -119,6 +119,51 @@ $('.number').editable(edit_submit, {
  });
 
 
+jQuery.validator.addMethod("exactlength", function(value, element, param) {
+ return this.optional(element) || value.length == param;
+}, $.validator.format("Please enter exactly {0} characters."));
+
+
+$('.phone').editable(edit_submit, {
+     // type     : 'textarea',
+     // onblur   : 'submit',
+     event: 'click',
+     indicator : 'saving ...',
+     select : true,
+     type: 'number',
+     onsubmit: function(settings, td) {
+        var input = $(td).find('input');
+        $(this).validate({
+            rules: {
+                'nameofinput': {
+                    number: true
+                },
+                value: {
+                    required: true,
+                    phone: "(639)",
+                    exactlength: 12
+                },
+            },
+            messages: {
+                phone: "Invalid Input"
+            },
+            errorClass: "warning",
+            submitHandler: function() { 
+            }
+        });
+
+        return ($(this).valid());
+    },
+    submitdata : function(value, settings) {
+       return {_method: "PUT",_token:token,col:$(this).attr("class").split(' ')[1]};
+    },
+    callback : function(value, settings) {
+         $(this).addClass('success');
+    }
+ });
+
+
+
 
 
 $.validator.addMethod(
@@ -128,6 +173,15 @@ $.validator.addMethod(
         return this.optional(element) || re.test(value);
     },
     "Please check your input."
+);
+
+$.validator.addMethod(
+    "phone",
+    function(value, element, regexp) {
+        var re = new RegExp(regexp);
+        return this.optional(element) || re.test(value);
+    },
+    "Invalid phone number"
 );
 
 

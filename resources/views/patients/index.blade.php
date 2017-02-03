@@ -83,7 +83,7 @@
               <td class="edit patient_father_name" id="{{$patient->PatientID}}">{{$patient->patient_father_name}}</td>
               <td class="edit patient_guardian_name" id="{{$patient->PatientID}}">{{$patient->patient_guardian_name}}</td>
               <td class="edit patient_address" id="{{$patient->PatientID}}">{{$patient->patient_address}}</td>
-              <td class="number patient_phonenumber" id="{{$patient->PatientID}}">{{$patient->patient_phonenumber}}</td>
+              <td class="phone patient_phonenumber" id="{{$patient->PatientID}}">{{$patient->patient_phonenumber}}</td>
               {{-- <td><input type="hidden" name="_method" value="PUT" /></td> --}}
 
               <td>

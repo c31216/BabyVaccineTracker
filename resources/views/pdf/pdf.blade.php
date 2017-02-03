@@ -6757,6 +6757,13 @@ button.close {
 }
 /*# sourceMappingURL=bootstrap.css.map */
 </style>
+
+
+<h1 class="text-center">Mexico Rural Health Center</h1>
+<p class="text-center">Brgy. San Antonio, Mexico, Pampanga</p>
+
+<br><br><br><br>
+
 <div class="table-responsive">
       <table class="table table-bordered">
         <h3>Basic info</h3>
@@ -6766,8 +6773,9 @@ button.close {
             <th>Date of birth</th>
             <th>Last name</th>
             <th>First name</th> 
-            <th>Weight</th>
-            <th>Height</th>
+            <th>Weight (kg)</th>
+            <th>Height (cm)</th>
+            <th>Head Circumference (cm)</th>
             <th>Age</th>
             <th>Sex</th>
             <th>Name of mother</th>
@@ -6782,6 +6790,7 @@ button.close {
               <td>{{$patients->patient_fname}}</td>
               <td>{{$patients->patient_weight}}</td>
               <td>{{$patients->patient_height}}</td>
+              <td>{{$patients->patient_headcircumference}}</td>
               <td>{{$patients->patient_lname}}</td>
               <td>{{$patients->patient_sex}}</td>
               <td>{{$patients->patient_mother_name}}</td>
@@ -6790,7 +6799,7 @@ button.close {
         </tbody>
       </table>
     </div><!-- Div.table-responsive-->
-
+<br>
     <div class="table-responsive">
       <table class="table table-bordered">
       <h3>TCL For Nutrition and EPI Program P1</h3>

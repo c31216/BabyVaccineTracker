@@ -2,7 +2,7 @@
 $(function(){
 	var $vaccine_id = $('#a option').val();
 	$('input[name=expected_vaccine]').val($vaccine_id);
-	$('input.btn').submit(function(){
+	$('form').submit(function(){
 
 		$selected_id = $('select#a').find(":selected").attr('value');
 		

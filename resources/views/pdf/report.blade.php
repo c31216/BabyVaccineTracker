@@ -6792,8 +6792,9 @@ button.close {
             <th>Date of birth</th>
             <th>Last name</th>
             <th>First name</th> 
-            <th>Weight</th>
-            <th>Height</th>
+            <th>Weight (kg)</th>
+            <th>Height (cm)</th>
+            <th>Head Circumference (cm)</th>
             <th>Age</th>
             <th>Sex</th>
             <th>Name of mother</th>
@@ -6809,6 +6810,7 @@ button.close {
                   <td>{{$patient->patient_fname}}</td>
                   <td>{{$patient->patient_weight}}</td>
                   <td>{{$patient->patient_height}}</td>
+                  <td>{{$patient->patient_headcircumference}}</td>
                   <td>{{$patient->patient_lname}}</td>
                   <td>{{$patient->patient_sex}}</td>
                   <td>{{$patient->patient_mother_name}}</td>
