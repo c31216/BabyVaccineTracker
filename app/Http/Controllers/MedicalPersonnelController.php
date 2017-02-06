@@ -46,8 +46,8 @@ class MedicalPersonnelController extends Controller
         ]);
 
         $MedicalPersonnel = new MedicalPersonnel;
-        $MedicalPersonnel->medicalpersonnel_role = $request->medicalpersonnel_role;
-        $MedicalPersonnel->medicalpersonnel_name = $request->medicalpersonnel_name;
+        $MedicalPersonnel->medicalpersonnel_role = 'midwife';
+        $MedicalPersonnel->medicalpersonnel_name = 'dsfsdf';
 
         Session::flash('success' , 'Submitted Successfully');
 
