@@ -46,7 +46,10 @@ class MedicalPersonnelController extends Controller
         ]);
 
         $MedicalPersonnel = new MedicalPersonnel;
-        
+        $MedicalPersonnel->medicalpersonnel_role = 'adasdsads';
+        $MedicalPersonnel->medicalpersonnel_name = 'adasdsads';
+        $MedicalPersonnel->save();
+
         Session::flash('success' , 'Submitted Successfully');
 
         return redirect()->route('add.index');
