@@ -45,13 +45,8 @@ class MedicalPersonnelController extends Controller
                 'medicalpersonnel_name' => 'required|max:255',
         ]);
 
-        $MedicalPersonnel = new MedicalPersonnel;
-        $MedicalPersonnel->medicalpersonnel_role = 'midwife';
-        $MedicalPersonnel->medicalpersonnel_name = 'dsfsdf';
-
+      
         Session::flash('success' , 'Submitted Successfully');
-
-        $MedicalPersonnel->save();
 
         return redirect()->route('add.index');
     }
