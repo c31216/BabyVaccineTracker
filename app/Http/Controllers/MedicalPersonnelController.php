@@ -45,7 +45,8 @@ class MedicalPersonnelController extends Controller
                 'medicalpersonnel_name' => 'required|max:255',
         ]);
 
-      
+        $MedicalPersonnel = new MedicalPersonnel;
+        
         Session::flash('success' , 'Submitted Successfully');
 
         return redirect()->route('add.index');
