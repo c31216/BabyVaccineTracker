@@ -45,10 +45,10 @@ class MedicalPersonnelController extends Controller
                 'medicalpersonnel_name' => 'required|max:255',
         ]);
 
-        $MedicalPersonnel = new MedicalPersonnel;
-        $MedicalPersonnel->medicalpersonnel_role = 'adasdsads';
-        $MedicalPersonnel->medicalpersonnel_name = 'adasdsads';
-        $MedicalPersonnel->save();
+        $medicalpersonnel = new MedicalPersonnel;
+        $medicalpersonnel->medicalpersonnel_role = 'adasdsads';
+        $medicalpersonnel->medicalpersonnel_name = 'adasdsads';
+        $medicalpersonnel->save();
 
         Session::flash('success' , 'Submitted Successfully');
 
